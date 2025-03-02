@@ -11,7 +11,7 @@ export const PostService = {
         await apiHandler.post('/post_relation/create', newPostDto);
     },
 
-    async getAllPosts(): Promise<{ postInfo: cardPostInfo, userInfo: cardUserInfo, postActivity: cardActivityInfo }> {
+    async getAllPosts(): Promise<{ postInfo: cardPostInfo, userInfo: cardUserInfo, postActivity: cardActivityInfo }[]> {
         const response = await apiHandler.get('/post_log/allposts');
         return response.data; // { postInfo: ..., userInfo: ... } 형태
     },

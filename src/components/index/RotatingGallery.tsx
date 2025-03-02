@@ -3,11 +3,21 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
+interface ImageType {
+    src: string;
+    alt: string;
+    caption?: string;
+}
+
+interface RotatingGalleryProps {
+    images: ImageType[];
+}
+
 /**
  * 회전 갤러리 컴포넌트
  * 이미지 배열을 회전하며 보여주며, 좌우 버튼으로 전환 가능.
  */
-const RotatingGallery = ({ images }) => {
+const RotatingGallery:React.FC<RotatingGalleryProps> = ({ images }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const totalImages = images.length;
 
@@ -24,7 +34,7 @@ const RotatingGallery = ({ images }) => {
     return (
         <div className="relative w-full max-w-4xl mx-auto h-80">
             <div className="absolute inset-0 flex items-center justify-center">
-                {images.map((image, index) => {
+                {images.map((image, index:number) => {
                     // 현재 이미지와의 거리 계산 (-2, -1, 0, 1, 2)
                     let distance = (index - currentIndex + totalImages) % totalImages;
                     if (distance > totalImages / 2) distance -= totalImages;

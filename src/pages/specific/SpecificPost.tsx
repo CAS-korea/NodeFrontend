@@ -1,32 +1,23 @@
 // src/components/SpecificPost.tsx
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
-import { Link, useParams } from "react-router-dom";
-import { marked } from "marked";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-    Heart,
-    Flag,
-    MessageCircle,
-    Bookmark,
-    Send,
-    ChevronLeft,
-    Calendar,
-    Clock,
-} from "lucide-react";
-import { useServices } from "../../context/ServicesProvider";
+import React, {useCallback, useEffect, useState} from "react";
+import {Link, useParams} from "react-router-dom";
+import {marked} from "marked";
+import {AnimatePresence, motion} from "framer-motion";
+import {Bookmark, Calendar, ChevronLeft, Clock, Flag, Heart, MessageCircle, Send,} from "lucide-react";
+import {useServices} from "../../context/ServicesProvider";
 import PostReportModal from "../../components/PostReportModal";
-import { Button } from "../../components/ui/button";
-import { Card, CardContent, CardFooter } from "../../components/ui/card";
-import { Separator } from "../../components/ui/separator";
-import { ClientUrl } from "../../constants/ClientUrl";
-import type { postActivity, postInfo, userInfo } from "../../types/PostDetailDto";
-import type { CommentDetailDto } from "../../types/CommentDetailDto";
-import { NewCommentDto } from "../../types/NewCommentDto";
+import {Button} from "../../components/ui/button";
+import {Card, CardContent, CardFooter} from "../../components/ui/card";
+import {Separator} from "../../components/ui/separator";
+import {ClientUrl} from "../../constants/ClientUrl";
+import type {postActivity, postInfo, userInfo} from "../../types/PostDetailDto";
+import type {CommentDetailDto} from "../../types/CommentDetailDto";
+import {NewCommentDto} from "../../types/NewCommentDto";
 import PostComment from "../../components/PostComment";
-import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../components/ui/tooltip";
+import {Avatar, AvatarFallback, AvatarImage} from "../../components/ui/avatar";
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "../../components/ui/tooltip";
 
 const SpecificPost: React.FC = () => {
     const { postId } = useParams<{ postId: string }>();
@@ -165,7 +156,7 @@ const SpecificPost: React.FC = () => {
         }
     };
 
-    const formatDate = (dateString: string) => {
+    const formatDate = (dateString: Date) => {
         const date = new Date(dateString);
         return date.toLocaleDateString("en-US", {
             year: "numeric",
