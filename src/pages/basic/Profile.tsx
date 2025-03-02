@@ -5,7 +5,7 @@ import {Edit2, ImageIcon, X} from "lucide-react";
 import PostCard from "../../components/PostCard";
 import {useServices} from "../../context/ServicesProvider.tsx";
 import {cardActivityInfo, cardPostInfo, cardUserInfo} from "../../types/PostcardDto.ts";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
 const dummyUserInfo = {
     name: "김아프간타",
@@ -19,16 +19,8 @@ const dummyUserInfo = {
         "열정적인 개발자, 창의적인 문제 해결사, 그리고 끊임없는 학습자입니다. 새로운 기술에 대한 호기심과 도전 정신으로 가득 차 있습니다.",
 };
 
-interface UserInfo {
-    name: string;
-    email: string;
-    phoneNumber: string;
-    role: string;
-}
 
 const Profile: React.FC = () => {
-    const token = Cookies.get("info");
-    const userInfo: UserInfo | null = token ? JSON.parse(token) : null;
 
     const [postVisibility, setPostVisibility] = useState<"public" | "private">("public");
     const [posts, setPosts] = useState<{
