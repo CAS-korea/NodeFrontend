@@ -1,6 +1,6 @@
-import type React from "react"
-import {motion} from "framer-motion"
-import {Heart, Flag} from "lucide-react"
+import type React from "react";
+import {motion} from "framer-motion";
+import {Heart, Flag} from "lucide-react";
 import {CommentActivity, CommentContent, CommentUserInfo} from "../types/CommentDetailDto.ts";
 import {ClientUrl} from "../constants/ClientUrl.ts";
 import {Link} from "react-router-dom";
@@ -54,17 +54,18 @@ const PostComment: React.FC<PostCommentProps> = ({
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">{commentContent.comment}</p>
 
                 {/* 좋아요 & 신고 */}
-                <div className="mt-2 flex items-center space-x-4">
+                <div className="mt-2 flex items-center justify-between">
                     <button onClick={onLikeComment}
                             className={`flex items-center space-x-1 text-xs ${commentActivity.liked ? "text-red-500" : "text-gray-500 hover:text-gray-700"}`}>
                         <Heart
                             className={`h-4 w-4 ${commentActivity.liked ? "fill-current text-red-500" : "stroke-current"}`}/>
                         <span>좋아요</span>
+                        <span className="ml-1">({commentContent.likesCount})</span>
                     </button>
                     <button onClick={onReportComment}
                             className={`flex items-center space-x-1 text-xs ${commentActivity.reported ? "text-red-500" : "text-gray-500 hover:text-gray-700"}`}>
                         <Flag
-                            className={`h-4 w-4 ${commentActivity.liked ? "fill-current text-yellow-500" : "stroke-current"}`}/>
+                            className={`h-4 w-4 ${commentActivity.reported ? "fill-current text-red-500" : "stroke-current"}`}/>
                         <span>신고</span>
                     </button>
                 </div>
@@ -74,4 +75,3 @@ const PostComment: React.FC<PostCommentProps> = ({
 };
 
 export default PostComment
-

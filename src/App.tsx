@@ -6,6 +6,7 @@ import CustomCursor from './components/CustomCursor.tsx';
 import {useEffect} from "react";
 import { ThemeProvider } from './layouts/ThemeContext'; // 전역 테마 컨텍스트
 
+
 function App() {
     useEffect(() => {
         document.title = "NODE";

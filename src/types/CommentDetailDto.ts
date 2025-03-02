@@ -9,6 +9,7 @@ export interface CommentDetailDto {
 export interface CommentContent {
     commentId: string;
     comment: string;
+    likesCount: number;
 }
 
 export interface CommentActivity {

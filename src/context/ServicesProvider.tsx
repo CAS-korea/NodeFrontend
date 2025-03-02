@@ -1,32 +1,34 @@
+// src/context/ServicesProvider.tsx
 import { createContext, ReactNode, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthService } from "../services/AuthService.ts";
-import { PostService } from "../services/PostService.ts";
-import { AdminService } from "../services/AdminService.ts";
-import { LoginDto } from "../types/LoginDto.ts";
-import { UserEntity } from "../types/UserEntity.ts";
-import { NewPostDto } from "../types/NewPostDto.ts";
-import { PostEntity } from "../types/PostEntity.ts";
-import {FileService} from "../services/FileService.ts";
-import {cardActivityInfo, cardPostInfo, cardUserInfo} from "../types/PostcardDto.ts";
-import {postActivity, postInfo, userInfo} from "../types/PostDetailDto.ts";
-import {CommentDetailDto} from "../types/CommentDetailDto.ts";
-import {NewCommentDto} from "../types/NewCommentDto.ts";
-import {CommentService} from "../services/CommentService.ts";
-import {UserInfoDto} from "../types/UserInfoDto.ts";
-import {UserService} from "../services/UserService.ts";
+import { AuthService } from "../services/AuthService";
+import { PostService } from "../services/PostService";
+import { AdminService } from "../services/AdminService";
+import { LoginDto } from "../types/LoginDto";
+import { UserEntity } from "../types/UserEntity";
+import { NewPostDto } from "../types/NewPostDto";
+import { PostEntity } from "../types/PostEntity";
+import { FileService } from "../services/FileService";
+import { cardActivityInfo, cardPostInfo, cardUserInfo } from "../types/PostcardDto";
+import { postActivity, postInfo, userInfo } from "../types/PostDetailDto";
+import { CommentDetailDto } from "../types/CommentDetailDto";
+import { NewCommentDto } from "../types/NewCommentDto";
+import { CommentService } from "../services/CommentService";
+import { UserInfoDto } from "../types/UserInfoDto";
+import { UserService } from "../services/UserService";
+import { UserProfileDto } from "../types/UserProfileDto";
 
 export interface ServicesContextType {
     login: (loginDTO: LoginDto) => Promise<void>;
     register: (userEntity: UserEntity) => Promise<void>;
     logout: () => void;
     createPost: (newPostDto: NewPostDto) => Promise<void>;
-    getAllPosts: () => Promise<{postInfo: cardPostInfo, userInfo: cardUserInfo, postActivity: cardActivityInfo}>;
+    getAllPosts: () => Promise<{ postInfo: cardPostInfo; userInfo: cardUserInfo; postActivity: cardActivityInfo }[]>;
     getPostById: (postId: string) => Promise<{
-        post: postInfo,
-        postActivity: postActivity,
-        author: userInfo,
-        comment: CommentDetailDto[]
+        post: postInfo;
+        postActivity: postActivity;
+        author: userInfo;
+        comment: CommentDetailDto[];
     }>;
     likePost: (postId: string) => Promise<void>;
     scrapPost: (postId: string) => Promise<void>;
@@ -46,6 +48,8 @@ export interface ServicesContextType {
     likeComment: (commentId: string) => Promise<void>;
     reportComment: (commentId: string) => Promise<void>;
     getUserInfo: (userId: string) => Promise<UserInfoDto>;
+    getUserProfile: (userId: string) => Promise<UserProfileDto>;
+    updateUserProfile: (updateProfileDto: { name?: string; introduce?: string; profileImageUrl?: string }) => Promise<string>; // void -> string으로 변경
 }
 
 export const ServicesContext = createContext<ServicesContextType | undefined>(undefined);
@@ -54,7 +58,7 @@ export const ServicesProvider: React.FC<{ children: ReactNode }> = ({ children }
     const navigate = useNavigate();
 
     const value: ServicesContextType = {
-        // 🔹 인증 관련 함수 (await 추가)
+        // 🔹 인증 관련 함수
         login: async (loginDTO) => {
             await AuthService.login(loginDTO);
             navigate("/home");
@@ -72,7 +76,7 @@ export const ServicesProvider: React.FC<{ children: ReactNode }> = ({ children }
         findPassword: async (email) => await AuthService.findPassword(email),
         resetPassword: async (token, newPassword) => await AuthService.resetPassword(token, newPassword),
 
-        // 🔹 포스트 관련 함수 (await 추가)
+        // 🔹 포스트 관련 함수
         createPost: async (newPostDto) => await PostService.createPost(newPostDto),
         getAllPosts: async () => await PostService.getAllPosts(),
         getPostById: async (postId) => await PostService.getPostById(postId),
@@ -81,23 +85,25 @@ export const ServicesProvider: React.FC<{ children: ReactNode }> = ({ children }
         reportPost: async (postId) => await PostService.reportPost(postId),
         getUserPosts: async (userId) => await PostService.getUserPosts(userId),
 
-        // 🔹 어드민 관련 함수 (await 추가)
+        // 🔹 어드민 관련 함수
         authorizeUser: async (userId, status) => await AdminService.authorizeUser(userId, status),
         getNonuserList: async () => await AdminService.getNonuserList(),
         getUserList: async () => await AdminService.getUserList(),
         updateUserInfo: async (userId, userEntity) => await AdminService.updateUserInfo(userId, userEntity),
         banUser: async (userId, days) => await AdminService.banUser(userId, days),
 
-        // 🔹 댓글 관련 함수 (await 추가)
+        // 🔹 댓글 관련 함수
         createComment: async (postId, newCommentDto) => await CommentService.createComment(postId, newCommentDto),
         likeComment: async (commentId) => await CommentService.likeComment(commentId),
         reportComment: async (commentId) => await CommentService.reportComment(commentId),
 
-        // 🔹 유저 관련 함수 (await 추가)
+        // 🔹 유저 관련 함수
         getUserInfo: async (userId) => await UserService.getUserInfo(userId),
+        getUserProfile: async (userId) => await UserService.getUserProfile(userId),
+        updateUserProfile: async (updateProfileDto) => await UserService.updateUserProfile(updateProfileDto), // 반환 타입 string으로 맞춤
 
-        // 🔹 파일 관련 함수 (await 추가)
-        uploadImage: async (file) => await FileService.uploadImage(file)
+        // 🔹 파일 관련 함수
+        uploadImage: async (file) => await FileService.uploadImage(file),
     };
 
     return <ServicesContext.Provider value={value}>{children}</ServicesContext.Provider>;

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {ClientUrl} from "../constants/ClientUrl.ts";
+import {ClientUrl} from "../../constants/ClientUrl.ts";
 
 const Header: React.FC = () => {
     return (

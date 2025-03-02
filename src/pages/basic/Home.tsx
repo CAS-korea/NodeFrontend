@@ -18,7 +18,6 @@ const Home: React.FC = () => {
         setLoading(true);
         try {
             const allPosts = await getAllPosts();
-            // setPosts(allPosts.slice(0, visibleCount));
             if (Array.isArray(allPosts)) {
                 setPosts(allPosts);  // 정상적인 배열이면 상태 업데이트
             } else {
@@ -88,21 +87,20 @@ const Home: React.FC = () => {
             <h1 className="text-3xl font-semibold text-gray-800 dark:text-gray-200">홈</h1>
             <div className="space-y-4 mt-4">
                 {posts.length > 0 ? (
-                    posts
-                        .map(({ postInfo, userInfo, postActivity }) => (
-                        <PostCard key={postInfo.postId} postInfo={postInfo} userInfo={userInfo} postActivity={postActivity} onLike={() => handleLikePost(postInfo.postId)} isLiking={isLiking} onScrap={() => handleScrapPost(postInfo.postId)} isScrapping={isScrapping}/>
+                    posts.map(({ postInfo, userInfo, postActivity }) => (
+                        <PostCard
+                            key={postInfo.postId}
+                            postInfo={{...postInfo, thumbNailImage: postInfo.thumbNailImage || undefined}}
+                            userInfo={userInfo}
+                            postActivity={postActivity}
+                            onLike={() => handleLikePost(postInfo.postId)}
+                            isLiking={isLiking}
+                            onScrap={() => handleScrapPost(postInfo.postId)}
+                            isScrapping={isScrapping}
+                        />
                     ))
                 ) : (
                     <p className="text-gray-400 dark:text-gray-500 text-center">게시물이 없습니다.</p>
-
-                    //     posts.map((post, index) => (
-                    //         <div ref={index === posts.length - 1 ? lastPostRef : null} key={post.postId}>
-                    //             <PostCard post={post} />
-                    //         </div>
-                    //     ))
-                    // ) : (
-                    //     <p className="text-gray-400 dark:text-gray-500 text-center">게시물이 없습니다.</p>
-                    //
                 )}
             </div>
         </PostContainer>

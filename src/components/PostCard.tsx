@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useMemo} from "react"
+// import React, {useMemo} from "react"
 import {Link} from "react-router-dom"
 import {motion, AnimatePresence} from "framer-motion"
 import {Bookmark, Heart, MessageSquare} from 'lucide-react'
@@ -18,20 +18,20 @@ interface PostCardProps {
     isScrapping: boolean;
 }
 
-const pastelColors = [
-    "#0c00ff", "#ff2d00", "#23ff00",
-]
+// const pastelColors = [
+//     "#0c00ff", "#ff2d00", "#23ff00",
+// ]
 
 // seed에 기본값을 부여하여 seed가 없을 경우에도 오류가 발생하지 않도록 함
-const getFixedBackgroundColor = (seed: string = ""): string => {
-    if (!seed) return pastelColors[0];
-    let hash = 0;
-    for (let i = 0; i < seed.length; i++) {
-        hash = seed.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    const index = Math.abs(hash) % pastelColors.length;
-    return pastelColors[index];
-}
+// const getFixedBackgroundColor = (seed: string = ""): string => {
+//     if (!seed) return pastelColors[0];
+//     let hash = 0;
+//     for (let i = 0; i < seed.length; i++) {
+//         hash = seed.charCodeAt(i) + ((hash << 5) - hash);
+//     }
+//     const index = Math.abs(hash) % pastelColors.length;
+//     return pastelColors[index];
+// }
 
 const PostCard: React.FC<PostCardProps> = ({
                                                postInfo,
@@ -42,7 +42,7 @@ const PostCard: React.FC<PostCardProps> = ({
                                                isLiking,
                                                isScrapping
                                            }) => {
-    const fixedBgColor = useMemo(() => getFixedBackgroundColor(postInfo.postId), [postInfo.postId]);
+    // const fixedBgColor = useMemo(() => getFixedBackgroundColor(postInfo.postId), [postInfo.postId]);
 
     if (postActivity.reported) return null;
 
@@ -54,7 +54,7 @@ const PostCard: React.FC<PostCardProps> = ({
             className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden w-full max-w-4xl mx-auto"
         >
             <Link to={`${ClientUrl.SPECIFICPOST}/${postInfo.postId}`} className="block">
-                {/* Header - Author Info */}
+            {/* Header - Author Info */}
                 <div className="px-6 pt-6 pb-4">
                     <div className="flex items-center justify-between mb-4">
                         <Link
@@ -80,57 +80,50 @@ const PostCard: React.FC<PostCardProps> = ({
                 </div>
 
                 {/* Thumbnail with Bookmark */}
-                <div className="relative h-64 bg-gray-100 dark:bg-gray-700">
-                    {postInfo.thumbNailImage ? (
+                {postInfo.thumbNailImage && postInfo.thumbNailImage.trim() !== "" && (
+                    <div className="relative h-64 bg-gray-100 dark:bg-gray-700">
                         <img
                             src={postInfo.thumbNailImage || "/placeholder.svg"}
                             alt={postInfo.title}
                             className="w-full h-full object-cover"
                         />
-                    ) : (
-                        <div
-                            className=" w-full h-full flex items-center justify-center p-6 text-center"
-                            style={{backgroundColor: fixedBgColor}}
-                        >
-                            <h2 className="text-2xl font-bold text-white leading-tight">{postInfo.title}</h2>
-                        </div>
-                    )}
 
-                    {/* Container for fixed positioning */}
-                    <div className="absolute bottom-[220px] left-[505px]">
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={postActivity.scraped ? "bookmarked" : "unbookmarked"}
-                                onClick={onScrap}
-                                className="cursor-pointer"
-                                initial={{scale: 0.8, opacity: 0}}
-                                animate={{scale: 1, opacity: 1}}
-                                exit={{scale: 0.8, opacity: 0}}
-                                transition={{duration: 0.15}}
-                                whileHover={{scale: 1.2}}
-                                whileTap={{scale: 0.95}}
-                            >
-                                {/* 스크랩 버튼 */}
-                                <div
-                                    className={`cursor-pointer ${isScrapping ? "pointer-events-none opacity-50" : ""}`}
-                                    onClick={(e) => {
-                                        e.preventDefault();  // 기본 링크 이동 방지
-                                        e.stopPropagation(); // 부모 요소로의 이벤트 전파 방지
-                                        if (!isScrapping) onScrap();
-                                    }}
+                        {/* Container for fixed positioning */}
+                        <div className="absolute bottom-[220px] left-[505px]">
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={postActivity.scraped ? "bookmarked" : "unbookmarked"}
+                                    onClick={onScrap}
+                                    className="cursor-pointer"
+                                    initial={{scale: 0.8, opacity: 0}}
+                                    animate={{scale: 1, opacity: 1}}
+                                    exit={{scale: 0.8, opacity: 0}}
+                                    transition={{duration: 0.15}}
+                                    whileHover={{scale: 1.2}}
+                                    whileTap={{scale: 0.95}}
                                 >
-                                    <Bookmark
-                                        className={`transition-colors ${
-                                            postActivity.scraped
-                                                ? "fill-current text-blue-500 dark:text-blue-400"
-                                                : "stroke-current text-gray-600 dark:text-gray-300"
-                                        } w-10 h-10`}
-                                    />
-                                </div>
-                            </motion.div>
-                        </AnimatePresence>
+                                    {/* 스크랩 버튼 */}
+                                    <div
+                                        className={`cursor-pointer ${isScrapping ? "pointer-events-none opacity-50" : ""}`}
+                                        onClick={(e) => {
+                                            e.preventDefault();  // 기본 링크 이동 방지
+                                            e.stopPropagation(); // 부모 요소로의 이벤트 전파 방지
+                                            if (!isScrapping) onScrap();
+                                        }}
+                                    >
+                                        <Bookmark
+                                            className={`transition-colors ${
+                                                postActivity.scraped
+                                                    ? "fill-current text-blue-500 dark:text-blue-400"
+                                                    : "stroke-current text-gray-600 dark:text-gray-300"
+                                            } w-10 h-10`}
+                                        />
+                                    </div>
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
                     </div>
-                </div>
+                )}
 
                 {/* Content */}
                 <div className="px-6 py-6">
@@ -142,8 +135,6 @@ const PostCard: React.FC<PostCardProps> = ({
                         {postInfo.title}
                     </motion.h2>
                     <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed line-clamp-3">{postInfo.summary}</p>
-
-
                 </div>
 
                 {/* Footer - Interactions */}
@@ -182,7 +173,7 @@ const PostCard: React.FC<PostCardProps> = ({
                             {/* 댓글 */}
                             <div className="flex items-center space-x-1">
                                 <MessageSquare className="w-4 h-4 text-gray-500 dark:text-gray-400"/>
-                                <span className="text-sm font-medium">{postInfo.commentsCount}</span>
+                                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">{postInfo.commentsCount}</span>
                             </div>
                         </div>
                     </div>

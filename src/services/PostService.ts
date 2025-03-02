@@ -4,6 +4,7 @@ import {PostEntity} from "../types/PostEntity.ts";
 import {cardActivityInfo, cardPostInfo, cardUserInfo} from "../types/PostcardDto.ts";
 import {postActivity, postInfo, userInfo} from "../types/PostDetailDto.ts";
 import {CommentDetailDto} from "../types/CommentDetailDto.ts";
+import {PostCardDto} from "../types/UserProfileDto.ts";
 
 export const PostService = {
     async createPost(newPostDto: NewPostDto) {
@@ -40,5 +41,10 @@ export const PostService = {
 
     async reportPost(postId: string) {
         await apiHandler.post(`/post_relation/reports/${postId}`, {});
-    }
+    },
+
+    async searchPosts(keywords: string): Promise<PostCardDto[]> {
+        const response = await apiHandler.get(`/post_log/search/${keywords}`);
+        return response.data; // Flux<PostCardDto>는 배열로 처리됨
+    },
 };

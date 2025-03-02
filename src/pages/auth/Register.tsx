@@ -29,6 +29,7 @@ const Register: React.FC = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [profileImage, setProfileImage] = useState<File | null>(null);
     const [profileImageUrl, setProfileImageUrl] = useState<string>("");
+    const [imageUploading, setImageUploading] = useState(false); // 이미지 업로드 중 상태 추가
 
     const [loading, setLoading] = useState(false);
 
@@ -166,11 +167,14 @@ const Register: React.FC = () => {
         const file = e.target.files?.[0];
         if (file) {
             setProfileImage(file);
+            setImageUploading(true); // 이미지 업로드 시작 시 로딩 상태를 true로 설정
             try {
                 const url = await uploadImage(file);
                 setProfileImageUrl(url);
             } catch (error) {
                 console.error("이미지 업로드 실패: ", error);
+            } finally {
+                setImageUploading(false); // 이미지 업로드 완료 후 로딩 상태를 false로 설정
             }
         }
     };
@@ -214,9 +218,7 @@ const Register: React.FC = () => {
         } finally {
             setLoading(false);
         }
-    };
-
-    // 각 단계별 화면 요소 렌더링 (case 1, 2, 3 유지)
+    }; // 각 단계별 화면 요소 렌더링 (case 1, 2, 3 유지)
     const renderStepContent = () => {
         switch (currentStep) {
             case 1:
@@ -242,6 +244,7 @@ const Register: React.FC = () => {
                                 className={`ml-2 px-4 py-2 rounded-lg text-white text-sm ${
                                     isIdChecked ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"
                                 }`}
+                                disabled={loading} // 로딩 중에는 버튼 비활성화
                             >
                                 {isIdChecked ? "사용 가능" : "중복 확인"}
                             </button>
@@ -306,6 +309,7 @@ const Register: React.FC = () => {
                                 className={`px-5 py-2 rounded-full transition-colors ${
                                     role === "STUDENT" ? "bg-gray-900 text-white" : "bg-gray-200 text-gray-800"
                                 }`}
+                                disabled={loading} // 로딩 중에는 버튼 비활성화
                             >
                                 재학생
                             </motion.button>
@@ -317,6 +321,7 @@ const Register: React.FC = () => {
                                 className={`px-5 py-2 rounded-full transition-colors ${
                                     role === "GRADUATE" ? "bg-gray-900 text-white" : "bg-gray-200 text-gray-800"
                                 }`}
+                                disabled={loading} // 로딩 중에는 버튼 비활성화
                             >
                                 졸업생
                             </motion.button>
@@ -328,6 +333,7 @@ const Register: React.FC = () => {
                                 className={`px-5 py-2 rounded-full transition-colors ${
                                     role === "PROFESSOR" ? "bg-gray-900 text-white" : "bg-gray-200 text-gray-800"
                                 }`}
+                                disabled={loading} // 로딩 중에는 버튼 비활성화
                             >
                                 교수
                             </motion.button>
@@ -339,10 +345,14 @@ const Register: React.FC = () => {
                     <div className="flex flex-col items-center space-y-6">
                         <p className="text-lg font-medium text-gray-700">프로필 사진 첨부</p>
                         <label
-                            className="cursor-pointer bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300">
+                            className={`cursor-pointer bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 ${
+                                imageUploading ? 'opacity-50 cursor-not-allowed' : ''
+                            }`}
+                        >
                             프로필 사진 선택
-                            <input type="file" accept="image/*" className="hidden" onChange={handleProfileImageChange}/>
+                            <input type="file" accept="image/*" className="hidden" onChange={handleProfileImageChange} disabled={imageUploading}/>
                         </label>
+                        {imageUploading && <p>Uploading image...</p>}
                         {profileImage && (
                             <div className="relative">
                                 <img src={URL.createObjectURL(profileImage)} alt="미리보기"
@@ -361,9 +371,7 @@ const Register: React.FC = () => {
             default:
                 return null;
         }
-    };
-
-    // 이전 / 다음 또는 회원가입 버튼 렌더링
+    }; // 이전 / 다음 또는 회원가입 버튼 렌더링
     const renderNavigation = () => {
         return (
             <div className="flex justify-between mt-8">
@@ -374,6 +382,7 @@ const Register: React.FC = () => {
                         whileHover={{scale: 1.05}}
                         whileTap={{scale: 0.95}}
                         className="text-gray-600 hover:text-gray-900"
+                        disabled={loading || imageUploading} // 로딩 또는 이미지 업로드 중에는 버튼 비활성화
                     >
                         이전
                     </motion.button>
@@ -385,6 +394,7 @@ const Register: React.FC = () => {
                         whileHover={{scale: 1.02}}
                         whileTap={{scale: 0.98}}
                         className="bg-gray-900 text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-colors"
+                        disabled={loading || imageUploading} // 로딩 또는 이미지 업로드 중에는 버튼 비활성화
                     >
                         다음
                     </motion.button>
@@ -394,7 +404,7 @@ const Register: React.FC = () => {
                         onClick={handleFinalSubmit}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        disabled={loading}
+                        disabled={loading || imageUploading} // 로딩 또는 이미지 업로드 중에는 버튼 비활성화
                         className="bg-gray-900 text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-colors disabled:bg-gray-400"
                     >
                         {loading ? "가입 중..." : "회원가입하기"}
