@@ -42,7 +42,12 @@ const Home: React.FC = () => {
         setIsLiking(true);
         try {
             await likePost(postId);
-            fetchPosts();
+            // Update the post state directly instead of refetching all posts
+            setPosts(posts.map(post =>
+                post.postInfo.postId === postId
+                    ? { ...post, postActivity: { ...post.postActivity, liked: true, likesCount: post.postActivity.likesCount + 1 } }
+                    : post
+            ));
         } catch (error) {
             console.error(error);
         } finally {
@@ -54,7 +59,12 @@ const Home: React.FC = () => {
         setIsScrapping(true);
         try {
             await scrapPost(postId);
-            fetchPosts();
+            // Update the post state directly instead of refetching all posts
+            setPosts(posts.map(post =>
+                post.postInfo.postId === postId
+                    ? { ...post, postActivity: { ...post.postActivity, scraped: true } }
+                    : post
+            ));
         } catch (error) {
             console.error(error);
         } finally {
@@ -77,7 +87,6 @@ const Home: React.FC = () => {
         <PostContainer>
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-3xl font-semibold text-gray-800 dark:text-gray-200">홈</h1>
-                {/* LayoutToggleButton에 layoutMode와 setLayoutMode props 전달 */}
                 <LayoutToggleButton layoutMode={layoutMode} setLayoutMode={setLayoutMode} />
             </div>
             {layoutMode === "scroll" ? (

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Bookmark, Heart } from "lucide-react";
 import Cookies from "js-cookie";
 import { ClientUrl } from "../../constants/ClientUrl";
 import { cardPostInfo, cardUserInfo } from "../../types/PostcardDto";
 import { postActivity } from "../../types/PostDetailDto";
-import { useServices } from "../../context/ServicesProvider";
 
 interface PostCardGridProps {
     postInfo: cardPostInfo;
@@ -27,7 +26,6 @@ const PostCardGrid: React.FC<PostCardGridProps> = ({
                                                        isLiking,
                                                        isScrapping,
                                                    }) => {
-    const { getUserInfo } = useServices();
     const [currentUserId, setCurrentUserId] = useState<string>("");
 
     useEffect(() => {
@@ -40,7 +38,7 @@ const PostCardGrid: React.FC<PostCardGridProps> = ({
                 console.error("쿠키 파싱 에러", error);
             }
         }
-    }, [getUserInfo]);
+    }, []);
 
     const profileLink =
         userInfo.userId === currentUserId
@@ -54,7 +52,7 @@ const PostCardGrid: React.FC<PostCardGridProps> = ({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
+            className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden opacity-40 hover:opacity-100"
         >
             <Link to={`${ClientUrl.SPECIFICPOST}/${postInfo.postId}`} className="block">
                 {/* Header: 작성자 정보 */}
@@ -80,8 +78,8 @@ const PostCardGrid: React.FC<PostCardGridProps> = ({
                             </div>
                         </Link>
                         <span className="text-[10px] text-gray-400">
-              {new Date(postInfo.createAt).toLocaleDateString()}
-            </span>
+                            {new Date(postInfo.createAt).toLocaleDateString()}
+                        </span>
                     </div>
                 </div>
 
