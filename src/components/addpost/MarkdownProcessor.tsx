@@ -132,12 +132,10 @@ const MarkdownProcessor: React.FC<MarkdownProcessorProps> = ({ content }) => {
     marked.setOptions({
         gfm: true,
         breaks: true,
-        headerIds: true,
-        highlight: (code) => code,
     })
 
     // 1) 마크다운 → HTML 변환
-    const rawHtml = marked.parse(content)
+    const rawHtml = marked.parse(content) as string
     // 2) DOMPurify로 HTML 정제 (XSS 및 불필요한 태그 제거)
     const safeHtml = DOMPurify.sanitize(rawHtml)
     // 3) DOMParser로 첫 글자 래핑 등 추가 스타일 적용

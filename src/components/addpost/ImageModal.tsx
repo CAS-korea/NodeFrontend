@@ -24,7 +24,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ onClose, onInsert }) => {
     const [uploadedImageUrl, setUploadedImageUrl] = useState<string>("")
     const [imageSize, setImageSize] = useState<number>(100) // 기본 이미지 크기 100%
     const [isUploading, setIsUploading] = useState(false)
-    const [activeTab, setActiveTab] = useState<"upload" | "url">("upload")
+    const [, setActiveTab] = useState<"upload" | "url">("upload")
 
     // 파일 드래그 이벤트 핸들러
     const handleDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {

@@ -7,7 +7,17 @@ import { motion } from "framer-motion";
  * 회전 갤러리 컴포넌트
  * 이미지 배열을 회전하며 보여주며, 좌우 버튼으로 전환 가능.
  */
-const RotatingGallery = ({ images }) => {
+
+interface ImageItem {
+    src: string;
+    alt: string;
+    caption?: string;
+}
+
+interface RotatingGalleryProps {
+    images: ImageItem[];
+}
+const RotatingGallery: React.FC<RotatingGalleryProps> = ({ images }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const totalImages = images.length;
 

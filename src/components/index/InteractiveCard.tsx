@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 /**
  * 인터랙티브 카드 컴포넌트
@@ -10,15 +10,22 @@ import { X, ChevronRight } from "lucide-react";
  * - 클릭 시 모달을 띄워, 모달의 왼쪽 칸에는 이미지 위에 제목이 오버레이되고,
  *   이미지 하단에는 캡션과 닫기 버튼이 배치되며, 오른쪽 칸에는 주요 특징 및 설명이 표시됨.
  */
-const InteractiveCard = ({ title, description, image, color }) => {
+interface InteractiveCardProps {
+    title: string;
+    description: string;
+    image?: string;
+    color: string;
+}
+const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, image, color }) => {
     const [showModal, setShowModal] = useState(false);
     const [isHovering, setIsHovering] = useState(false);
-    const modalRef = useRef(null);
+    const modalRef = useRef<HTMLDivElement | null>(null);
+
 
     // 바깥 영역 클릭 시 모달 닫기
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (modalRef.current && !modalRef.current.contains(event.target)) {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
                 setShowModal(false);
             }
         };
