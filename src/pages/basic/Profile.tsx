@@ -3,7 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Edit2, Heart, ImageIcon, Users, X } from "lucide-react";
+import { Edit2, ImageIcon, X } from "lucide-react";
 import PostContainer from "../../components/postcard/Container.tsx";
 import PostCard from "../../components/postcard/PostCard.tsx";
 import FollowModal from "../../components/profile/FollowModal";

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import PostCardGrid from "./PostCardGrid";
-import { cardActivityInfo, cardPostInfo, cardUserInfo } from "../types/PostcardDto";
+import { cardActivityInfo, cardPostInfo, cardUserInfo } from "../../types/PostcardDto";
 
 interface PagedPostGridProps {
     posts: { postInfo: cardPostInfo; userInfo: cardUserInfo; postActivity: cardActivityInfo }[];

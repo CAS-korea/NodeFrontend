@@ -30,8 +30,6 @@ const TooltipContent = React.forwardRef<
                 "text-black dark:text-white z-50 overflow-hidden rounded-md bg-primary py-1.5 text-xs text-primary-foreground tooltip-content-slow data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
                 className,
             )}
-            // Add longer delay before tooltip disappears
-            duration={2000} // 2 seconds before auto-hiding (if supported by Radix)
             {...props}
         />
     </TooltipPrimitive.Portal>

@@ -7,7 +7,12 @@ import { motion, AnimatePresence } from "framer-motion";
  * 확대되는 이미지 컴포넌트
  * 마우스 호버 시 이미지 확대와 파동 효과 애니메이션 적용.
  */
-const ZoomImage = ({ src, alt }) => {
+interface ZoomImageProps {
+    src: string;
+    alt: string;
+}
+
+const ZoomImage: React.FC<ZoomImageProps> = ({ src, alt }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (

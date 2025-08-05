@@ -10,7 +10,6 @@ import {
     Sun,
     Bell,
 } from "lucide-react";
-import Header from "../components/HeaderMain";
 import AdminSidebar from "../components/AdminSidebar";
 import CheerOverlay from "../components/secretfile/CheerOverlay";
 
@@ -23,7 +22,11 @@ interface Notification {
     read: boolean;
 }
 
-const AdminLayout: React.FC = ({ children }) => {
+interface AdminLayoutProps {
+    children?: React.ReactNode;
+}
+
+const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
     const location = useLocation();
     const shouldReduceMotion = useReducedMotion();
 

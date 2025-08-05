@@ -78,7 +78,7 @@ export const ServicesProvider: React.FC<{ children: ReactNode }> = ({ children }
 
         // 🔹 포스트 관련 함수
         createPost: async (newPostDto) => await PostService.createPost(newPostDto),
-        getAllPosts: async () => await PostService.getAllPosts(),
+        getAllPosts: async () => {const post = await PostService.getAllPosts();return [post];},
         getPostById: async (postId) => await PostService.getPostById(postId),
         likePost: async (postId) => await PostService.likePost(postId),
         scrapPost: async (postId) => await PostService.scrapPost(postId),

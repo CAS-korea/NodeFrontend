@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Bookmark, Heart } from "lucide-react";
 import Cookies from "js-cookie";
 import { ClientUrl } from "../../constants/ClientUrl";

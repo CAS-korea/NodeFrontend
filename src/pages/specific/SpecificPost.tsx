@@ -178,8 +178,11 @@ const SpecificPost: React.FC = () => {
         }
     };
 
-    const formatDate = (dateString: string) => {
-        const date = new Date(dateString);
+     const formatDate = (dateInput: string | Date) => {
+           // string이면 Date로 변환, Date면 그대로 사용
+               const date = typeof dateInput === "string"
+             ? new Date(dateInput)
+                 : dateInput;
         return date.toLocaleDateString("en-US", {
             year: "numeric",
             month: "numeric",
@@ -193,11 +196,9 @@ const SpecificPost: React.FC = () => {
      */
     const processContent = (markdown: string) => {
         if (!markdown) return "";
+        // (1) marked.parse는 string | Promise<string> 반환 → 강제 단언
+        const rawHtml = marked.parse(markdown) as string;
 
-        // 1) 마크다운 → HTML
-        const rawHtml = marked(markdown);
-
-        // 2) DOMParser로 HTML 파싱
         const parser = new DOMParser();
         const doc = parser.parseFromString(rawHtml, "text/html");
 
@@ -229,7 +230,6 @@ const SpecificPost: React.FC = () => {
 
         // 5) targetP에서 첫 번째 알파벳/숫자(또는 한글 등)를 찾아 span으로 감싸기
         //    (childNodes 순회하며 TEXT_NODE 찾기 → 첫 글자)
-        let done = false;
         for (const node of targetP.childNodes) {
             if (node.nodeType === Node.TEXT_NODE) {
                 const text = node.nodeValue || "";
@@ -258,8 +258,6 @@ const SpecificPost: React.FC = () => {
 
                     // 원래 노드는 제거
                     targetP.removeChild(node);
-
-                    done = true;
                     break;
                 }
             }
