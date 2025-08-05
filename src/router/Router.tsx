@@ -48,7 +48,7 @@ const Router: React.FC = () => {
             </Route>
 
             {/* 🔹 로그인 후 접근 가능한 모든 페이지 (일반 사용자) */}
-            { /* <Route element={<ProtectedRoute />}> */}
+            <Route element={<ProtectedRoute />}>
                 <Route element={<BasicLayout />}>
                     <Route path={ClientUrl.HOME} element={<Home />} />
                     <Route path={ClientUrl.SEARCH} element={<Search />} />
@@ -63,7 +63,7 @@ const Router: React.FC = () => {
                 </Route>
                 <Route path={ClientUrl.NEWPOST} element={<NewPost />} />
                 <Route path={`${ClientUrl.SPECIFICPOST}/:postId`} element={<SpecificPost />} />
-            {/*</Route>*/}
+            </Route>
         </Routes>
     );
 };
