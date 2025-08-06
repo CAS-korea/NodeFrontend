@@ -12,6 +12,11 @@ import ZoomImage from "../components/index/ZoomImage";
 import RotatingGallery from "../components/index/RotatingGallery";
 import ScrollProgress from "../components/index/ScrollProgress";
 import NeuralNetwork from "../components/index/NeuralNetwork";
+import GlassFilters from "../components/index/GlassFilters";
+
+
+
+import "./Index.css";
 
 const ModernIndex = () => {
     // 섹션 인뷰 훅 (스크롤에 따른 애니메이션 제어)
@@ -60,6 +65,7 @@ const ModernIndex = () => {
     return (
         <motion.div ref={containerRef} className="relative min-h-screen overflow-x-hidden" style={backgroundStyle}>
             {/* 미니멀한 배경 효과 */}
+            <GlassFilters />
             <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
                 <NeuralNetwork />
                 <div className="absolute inset-0 bg-gradient-radial from-blue-900/10 to-transparent opacity-40" />
@@ -138,19 +144,26 @@ const ModernIndex = () => {
                             </h2>
                             <p className="text-2xl font-medium text-white/90">- VISION OF CAS -</p>
                         </div>
-                        <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16" variants={staggerContainer} initial="hidden" animate="visible">
-                            <motion.div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl hover:bg-white/10 transition-colors duration-300" variants={fadeInUp}>
-                                <h3 className="text-xl font-bold text-white mb-2">탐구</h3>
-                                <p className="text-white/70">새로운 아이디어와 개념을 끊임없이 탐구합니다</p>
-                            </motion.div>
-                            <motion.div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl hover:bg-white/10 transition-colors duration-300" variants={fadeInUp}>
-                                <h3 className="text-xl font-bold text-white mb-2">도전</h3>
-                                <p className="text-white/70">무엇이든 해봐야 안다라는 생각으로 도전합니다</p>
-                            </motion.div>
-                            <motion.div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl hover:bg-white/10 transition-colors duration-300" variants={fadeInUp}>
-                                <h3 className="text-xl font-bold text-white mb-2">공유</h3>
-                                <p className="text-white/70">생각의 공유를 통해 더 큰 가치를 만들어 냅니다</p>
-                            </motion.div>
+
+                        <motion.div
+                            className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16"
+                            variants={staggerContainer}
+                            initial="hidden"
+                            animate="visible"
+                        >
+                            {[
+                                { title: "탐구", desc: "새로운 아이디어와 개념을 끊임없이 탐구합니다" },
+                                { title: "도전", desc: "무엇이든 해봐야 안다라는 생각으로 도전합니다" },
+                                { title: "공유", desc: "생각의 공유를 통해 더 큰 가치를 만들어 냅니다" },
+                            ].map(({ title, desc }) => (
+                                <motion.div
+                                    key={title}
+                                    variants={fadeInUp}
+                                >
+                                    <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
+                                    <p className="text-white/70">{desc}</p>
+                                </motion.div>
+                            ))}
                         </motion.div>
                     </motion.div>
                 </section>
@@ -160,7 +173,7 @@ const ModernIndex = () => {
                     <motion.div initial="hidden" animate={featuresInView ? "visible" : "hidden"} variants={fadeInUp} className="max-w-6xl mx-auto w-full">
                         <div className="text-center mb-16">
                             <motion.h2
-                                className="text-4xl font-bold text-white mb-4"
+                                className=" text-4xl font-bold text-white mb-4"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={featuresInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                 transition={{ duration: 0.6 }}
@@ -188,25 +201,25 @@ const ModernIndex = () => {
                                 title="정보교류회"
                                 description="CAS 회원들끼리 정보를 공유하며 교류합니다."
                                 image="index/index_roadmap.png?height=300&width=300"
-                                color="bg-gradient-to-br from-purple-500/90 to-black-900"
+
                             />
                             <InteractiveCard
                                 title="협업"
                                 description="학과 내 선배와 후배 간의 효과적인 협업을 위한 시스템을 구축합니다."
                                 image="/kimafganta.png?height=300&width=300"
-                                color="bg-gradient-to-br from-blue-500/90 to-white-900/90"
+
                             />
                             <InteractiveCard
                                 title="프로젝트 팀 구성"
                                 description="방학동안 같이 웹 프로젝트를 진행할 팀을 구성해드립니다"
                                 image="/kimafganta.png?height=300&width=300"
-                                color="bg-gradient-to-br from-teal-500/90 to-white-600/90"
+
                             />
                             <InteractiveCard
                                 title="프로젝트 쇼케이스"
                                 description="완성된 프로젝트를 공유하고 피드백을 받을 수 있는 기회를 제공합니다"
                                 image="index/index_roadmap.png?height=300&width=300"
-                                color="bg-gradient-to-br from-emerald-500/90 to-white-600/90"
+
                             />
                         </div>
                     </motion.div>

@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight } from 'lucide-react';
 
 /**
  * 인터랙티브 카드 컴포넌트
@@ -14,22 +14,20 @@ interface InteractiveCardProps {
     title: string;
     description: string;
     image?: string;
-    color: string;
 }
-const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, image, color }) => {
+
+const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, image }) => {
     const [showModal, setShowModal] = useState(false);
     const [isHovering, setIsHovering] = useState(false);
     const modalRef = useRef<HTMLDivElement | null>(null);
 
-
-    // 바깥 영역 클릭 시 모달 닫기
+    // This Effect synchronizes with the browser's DOM event system to handle clicks outside the modal. [^2]
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
                 setShowModal(false);
             }
         };
-
         if (showModal) {
             document.addEventListener("mousedown", handleClickOutside);
         }
@@ -100,7 +98,7 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
         <>
             {/* 기본 카드 */}
             <motion.div
-                className={`relative justify-self-center w-full max-w-md h-64 rounded-xl overflow-hidden cursor-pointer shadow-xl ${color}`}
+                className="glass-container justify-self-center w-full max-w-md h-64 rounded-xl overflow-hidden cursor-pointer shadow-xl"
                 onClick={() => setShowModal(true)}
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
@@ -109,11 +107,9 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
             >
-                {/* 카드 배경 오버레이 */}
-                <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-white/10" />
-
-                {/* 카드 기본 내용 */}
-                <div className="p-6 flex flex-col justify-between h-full relative z-10">
+                <div className="glass-wavy-bg" />
+                {/* 실제 카드 내용 -- z-10 으로 위에 올려 필터 영향 X */}
+                <div className="relative z-10 p-6 flex flex-col justify-between h-full">
                     <div>
                         <div className="flex items-center justify-between">
                             <h3 className="text-2xl font-bold text-white">{title}</h3>
@@ -130,24 +126,13 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
                         <ChevronRight size={16} className="ml-1" />
                     </motion.div>
                 </div>
-
-                {/* 호버 효과 */}
-                <motion.div
-                    className="absolute inset-0 bg-gradient-to-tr from-white/8 to-transparent"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: isHovering ? 1 : 0 }}
-                    transition={{ duration: 0.3 }}
-                />
-
-                {/* 장식 요소 */}
-                <div className="absolute -bottom-6 -right-6 w-24 h-24 rounded-full bg-white/5 blur-xl" />
             </motion.div>
 
             {/* 모달 */}
             <AnimatePresence>
                 {showModal && (
                     <motion.div
-                        className="fixed inset-0 flex items-center justify-center z-20"
+                        className="fixed inset-0 flex items-center justify-center z-50"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -166,21 +151,18 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
                                 <div className="md:w-2/5 w-full p-6">
                                     <div className="relative rounded-xl overflow-hidden aspect-square shadow-lg">
                                         <img
-                                            src={image || "/placeholder.svg"}
+                                            src={image || "/placeholder.svg?width=400&height=400&query=abstract"}
                                             alt={title}
                                             className="w-full h-full object-cover"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                                        {/* 이미지 상단에 제목 오버레이 */}
                                         <div className="absolute top-4 left-4 text-white text-2xl font-bold">
                                             {title}
                                         </div>
                                     </div>
-                                    {/* 사진 캡션 */}
                                     <p className="mt-4 text-center text-gray-400 text-sm">
                                         {detailedContent.caption}
                                     </p>
-                                    {/* 닫기 버튼 (왼쪽 칸 하단) */}
                                     <div className="mt-4 flex justify-center">
                                         <button
                                             onClick={() => setShowModal(false)}
@@ -190,7 +172,6 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
                                         </button>
                                     </div>
                                 </div>
-
                                 {/* 오른쪽 칸: 콘텐츠 섹션 */}
                                 <div className="md:w-3/5 w-full p-6">
                                     <h3 className="text-xl font-semibold text-white mb-4">주요 특징</h3>
@@ -203,9 +184,7 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ delay: index * 0.1 + 0.2 }}
                                             >
-                                                <div
-                                                    className={`${color} w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0`}
-                                                >
+                                                <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0">
                                                     {index + 1}
                                                 </div>
                                                 <p className="text-white/90">{feature}</p>

@@ -60,9 +60,48 @@
     height: 100%;
 }
 
+@layer utilities {
+    /* The container for the glass effect. It's a positioning context. */
+    .glass-container {
+        @apply relative;
+        /* 흰색 테두리 추가 */
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        /* 글로잉 효과 - 흰색 드롭 섀도우 */
+        box-shadow:
+                0 0 20px rgba(255, 255, 255, 0.1),
+                0 0 40px rgba(255, 255, 255, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        /* 호버 시 더 강한 글로우 효과 */
+        transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
 
+    .glass-container:hover {
+        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow:
+                0 0 30px rgba(255, 255, 255, 0.15),
+                0 0 60px rgba(255, 255, 255, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
 
-@layer base {}
+    /* This element creates the actual glass effect.
+       It sits behind the content. */
+    .glass-wavy-bg {
+        @apply absolute inset-0 pointer-events-none rounded-xl; /* Match parent's border-radius */
+
+        /* 1. Give it a semi-transparent background. */
+        background: rgba(255, 255, 255, 0.05);
+
+        /* 2. Blur the content *behind* this element. */
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+
+        /* 3. Apply the SVG filter to distort the element, creating the wavy effect. */
+        filter: url(#container-glass);
+
+        /* 4. Ensure it's behind the content (which has z-10) */
+        z-index: 0;
+    }
+}
 
 @layer base {
   * {
