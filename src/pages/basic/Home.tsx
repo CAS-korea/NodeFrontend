@@ -86,15 +86,12 @@ const Home: React.FC = () => {
                         posts.map(({ postInfo, userInfo, postActivity }) => (
                             <PostCard
                                 key={postInfo.postId}
-                                postInfo={{
-                                    ...postInfo,
-                                    thumbNailImage: postInfo.thumbNailImage || undefined,
-                                }}
+                                postInfo={postInfo}
                                 userInfo={userInfo}
                                 postActivity={postActivity}
                                 onLike={() => handleLikePost(postInfo.postId)}
-                                isLiking={isLiking}
                                 onScrap={() => handleScrapPost(postInfo.postId)}
+                                isLiking={isLiking}
                                 isScrapping={isScrapping}
                             />
                         ))

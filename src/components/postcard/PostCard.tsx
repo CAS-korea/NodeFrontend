@@ -9,6 +9,7 @@ import { ClientUrl } from "../../constants/ClientUrl.ts";
 import { cardPostInfo, cardUserInfo } from "../../types/PostcardDto.ts";
 import { postActivity } from "../../types/PostDetailDto.ts";
 import { useServices } from "../../context/ServicesProvider.tsx";
+import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
 
 interface PostCardProps {
     postInfo: cardPostInfo;
@@ -67,11 +68,10 @@ const PostCard: React.FC<PostCardProps> = ({
                             onClick={(e) => e.stopPropagation()}
                             className="flex items-center space-x-3 group"
                         >
-                            <img
-                                src={userInfo.profileImageUrl || "/placeholder.svg"}
-                                alt="Profile"
-                                className="w-12 h-12 rounded-full object-cover shadow-sm group-hover:shadow-md transition-shadow duration-200"
-                            />
+                            <Avatar className="h-12 w-12 border-2 border-white shadow-sm">
+                                <AvatarImage src={userInfo?.profileImageUrl || "/placeholder.svg"} alt={userInfo?.name || "Author"} />
+                                <AvatarFallback>{userInfo?.name?.charAt(0) || "U"}</AvatarFallback>
+                            </Avatar>
                             <div>
                                 <p className="text-sm font-medium text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                                     {userInfo.name}
@@ -89,7 +89,7 @@ const PostCard: React.FC<PostCardProps> = ({
                 {postInfo.thumbNailImage && postInfo.thumbNailImage.trim() !== "" ? (
                     <div className="relative h-64 bg-gray-100 dark:bg-gray-700">
                         <img
-                            src={postInfo.thumbNailImage || "/placeholder.svg"}
+                            src={postInfo.thumbNailImage}
                             alt={postInfo.title}
                             className="w-full h-full object-cover"
                         />

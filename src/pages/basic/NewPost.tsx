@@ -18,13 +18,7 @@ import MarkdownProcessor from "../../components/addpost/MarkdownProcessor"
 import { Button } from "../../components/ui/button"
 import { Card, CardContent } from "../../components/ui/card"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../components/ui/tooltip"
-
-// 마크다운에서 첫 이미지 URL 추출 함수
-const extractFirstImageUrl = (content: string): string => {
-    const regex = /!\[\]$$(https?:\/\/[^\s)]+)$$/
-    const match = content.match(regex)
-    return match ? match[1] : ""
-}
+import ExtractFirstImageUrl from "../../utils/ExtractFirstImage"
 
 const NewPost: React.FC = () => {
     // 서비스 및 상태 관리
@@ -43,10 +37,11 @@ const NewPost: React.FC = () => {
     const contentRef = useRef<HTMLTextAreaElement>(null)
     const emojiButtonRef = useRef<HTMLButtonElement>(null)
 
-    // 썸네일 이미지 추출
+    // 마크다운에서 첫 이미지 URL 추출 함수
     useEffect(() => {
-        setThumbNailImage(extractFirstImageUrl(content))
-    }, [content])
+        const url = ExtractFirstImageUrl(content);
+        if (url) setThumbNailImage(url);
+    }, [content]);
 
     // 클립보드 이미지 붙여넣기 처리
     const handlePaste = async (event: ClipboardEvent) => {

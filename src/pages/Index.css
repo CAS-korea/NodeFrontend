@@ -3,9 +3,6 @@
 @tailwind utilities;
 
 
-
-
-
 /* Firefox 스크롤바 스타일 */
 * {
     scrollbar-width: thin;

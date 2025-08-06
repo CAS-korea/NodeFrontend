@@ -9,7 +9,7 @@ export interface cardPostInfo {
     scrapsCount: number;
     commentsCount: number;
     createAt: string; // Date 대신 string으로 변경
-    thumbNailImage?: string;
+    thumbNailImage: string;
 }
 
 export interface cardUserInfo {
