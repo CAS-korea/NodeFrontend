@@ -5,7 +5,7 @@ import Router from "../src/router/Router.tsx"; // Router 컴포넌트를 별도 
 import CustomCursor from './components/CustomCursor.tsx';
 import {useEffect} from "react";
 import { ThemeProvider } from './layouts/ThemeContext'; // 전역 테마 컨텍스트
-
+import { Analytics } from "@vercel/analytics/next"
 
 function App() {
     useEffect(() => {
@@ -16,6 +16,7 @@ function App() {
         <ThemeProvider>
             <div className="App">
                 <CustomCursor />
+                <Analytics />
                 <BrowserRouter>
                     <ServicesProvider>
                         <Router />
