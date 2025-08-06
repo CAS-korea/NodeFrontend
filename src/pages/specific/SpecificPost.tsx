@@ -3,6 +3,12 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
 import { marked } from "marked";
+
+marked.setOptions({
+    gfm: true,   // 이미 GFM 문법을 쓰고 계시면 같이 켜 두세요
+    breaks: true // <- 핵심! single '\n' → <br>
+});
+
 import { motion, AnimatePresence } from "framer-motion";
 import {
     Heart,
