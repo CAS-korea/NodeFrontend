@@ -115,7 +115,7 @@ const NeuralNetwork: FC = () => {
                 const opacity = Math.max(0, (maxDist - dist) / maxDist) * 0.4;
 
                 if (opacity > 0) {
-                    ctx.strokeStyle = `rgba(51, 50, 275, ${opacity})`;
+                    ctx.strokeStyle = `rgba(20, 80, 185, ${opacity})`;
                     ctx.beginPath();
                     ctx.moveTo(a.x, a.y);
                     ctx.lineTo(b.x, b.y);
@@ -126,8 +126,8 @@ const NeuralNetwork: FC = () => {
             nodes.forEach((n) => {
                 ctx.beginPath();
                 ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
-                ctx.fillStyle = "#072dec";
-                ctx.shadowColor = "#e6e8ef";
+                ctx.fillStyle = "#7486e6";
+                ctx.shadowColor = "#8031e3";
                 ctx.shadowBlur = 60;
                 ctx.fill();
                 ctx.shadowBlur = 0;
