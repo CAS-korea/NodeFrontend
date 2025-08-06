@@ -359,7 +359,7 @@ const ModernIndex = () => {
                                 animate={contactInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                                 transition={{ duration: 0.8 }}
                             >
-                                <h3 className="text-2xl font-bold text-white mb-6">채찍피티 이벤트 참여 방법</h3>
+                                <h3 className="text-2xl font-bold text-white mb-6">CAS에 지원하세요!</h3>
                                 <div className="space-y-6">
                                     <div className="flex items-start gap-4">
                                         <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center mt-1">
@@ -367,7 +367,7 @@ const ModernIndex = () => {
                                         </div>
                                         <div>
                                             <h4 className="text-lg font-medium text-white mb-2">지원서 제출</h4>
-                                            <p className="text-white/70">온라인 지원서를 작성하여 제출해주세요. 대충 예시임</p>
+                                            <p className="text-white/70">온라인 지원서를 작성하여 제출해주세요.</p>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-4">
@@ -376,7 +376,7 @@ const ModernIndex = () => {
                                         </div>
                                         <div>
                                             <h4 className="text-lg font-medium text-white mb-2">면접 참여</h4>
-                                            <p className="text-white/70">간단한 면접을 통해 열정과 관심사를 공유해주세요 . 대충 예시임</p>
+                                            <p className="text-white/70">간단한 면접을 통해 열정과 관심사를 공유해주세요 .임</p>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-4">
@@ -385,13 +385,13 @@ const ModernIndex = () => {
                                         </div>
                                         <div>
                                             <h4 className="text-lg font-medium text-white mb-2">오리엔테이션</h4>
-                                            <p className="text-white/70">프로젝트 소개와 팀 빌딩 과정에 참여합니다 . 대충 예시임</p>
+                                            <p className="text-white/70">프로젝트 소개와 팀 빌딩 과정에 참여합니다.</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="mt-10">
                                     <button className="w-full py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-medium hover:shadow-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300">
-                                        지원하실?
+                                        연락주세요!
                                     </button>
                                 </div>
                             </motion.div>
