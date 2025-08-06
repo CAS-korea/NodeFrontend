@@ -146,7 +146,7 @@ const PostCard: React.FC<PostCardProps> = ({
                 <div className="px-6 py-4 border-t border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
                     <div className="flex items-center justify-between space-x-2">
                         <div className="flex items-center space-x-1 overflow-hidden max-w-[60%]">
-                            {postInfo.userTag.map((tag, index) => (
+                            {(postInfo.userTag ?? []).map((tag, index) => (
                                 <span
                                     key={index}
                                     className="text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200 whitespace-nowrap overflow-hidden text-ellipsis"
@@ -155,6 +155,8 @@ const PostCard: React.FC<PostCardProps> = ({
                                 </span>
                             ))}
                         </div>
+
+
 
                         <div className="flex items-center space-x-4">
                             <button

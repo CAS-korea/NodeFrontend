@@ -11,6 +11,7 @@ import InteractiveCard from "../components/index/InteractiveCard";
 import ZoomImage from "../components/index/ZoomImage";
 import RotatingGallery from "../components/index/RotatingGallery";
 import ScrollProgress from "../components/index/ScrollProgress";
+import NeuralNetwork from "../components/index/NeuralNetwork";
 
 const ModernIndex = () => {
     // 섹션 인뷰 훅 (스크롤에 따른 애니메이션 제어)
@@ -60,7 +61,8 @@ const ModernIndex = () => {
         <motion.div ref={containerRef} className="relative min-h-screen overflow-x-hidden" style={backgroundStyle}>
             {/* 미니멀한 배경 효과 */}
             <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-radial from-blue-900/10 to-transparent opacity-30" />
+                <NeuralNetwork />
+                <div className="absolute inset-0 bg-gradient-radial from-blue-900/10 to-transparent opacity-40" />
             </div>
 
             <ScrollProgress />
@@ -76,30 +78,17 @@ const ModernIndex = () => {
                         variants={fadeInUp}
                         className="text-center max-w-5xl mx-auto"
                     >
-                        <motion.div className="relative w-72 h-72 mx-auto mb-8">
+                        <motion.div className="relative h-72 mx-auto">
                             {/* 로고 확대/축소 애니메이션 */}
                             <motion.div
                                 className="absolute inset-0 flex justify-center items-center"
-                                animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
-                                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                             >
                                 <img src="/Node_Logo_Refined.png" alt="NODE Logo" className="w-full h-full object-contain" />
                             </motion.div>
 
-                            {/* 링 애니메이션: 부드럽게 회전하며 확장 */}
-                            <motion.div
-                                className="absolute inset-5 border-2 border-white-500/30 rounded-full"
-                                animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.4, 0.6] }}
-                                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-                            />
-                            <motion.div
-                                className="absolute inset-0 border-2 border-white-500/30 rounded-full"
-                                animate={{ scale: [1, 1.25, 1], opacity: [0.8, 0.4, 0.8] }}
-                                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
-                            />
                         </motion.div>
                         <motion.h1
-                            className="text-7xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-500 to-teal-400 tracking-wide leading-relaxed mb-4"
+                            className="text-6xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-blue-500 to-teal-400 tracking-wide leading-relaxed mb-8"
                             animate={{ backgroundPosition: ["0% center", "100% center", "0% center"] }}
                             transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
                             style={{ backgroundSize: "200% auto" }}
@@ -144,24 +133,21 @@ const ModernIndex = () => {
                         className="text-center max-w-4xl mx-auto"
                     >
                         <div className="mb-12">
-                            <h2 className="text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500 mb-6">
+                            <h2 className="text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-blue-500 to-teal-400 mb-6">
                                 "해봐야 안다"
                             </h2>
                             <p className="text-2xl font-medium text-white/90">- VISION OF CAS -</p>
                         </div>
                         <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16" variants={staggerContainer} initial="hidden" animate="visible">
                             <motion.div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl hover:bg-white/10 transition-colors duration-300" variants={fadeInUp}>
-                                <div className="text-4xl mb-4 text-blue-400">🔍</div>
                                 <h3 className="text-xl font-bold text-white mb-2">탐구</h3>
-                                <p className="text-white/70">새로운 아이디어와 기술을 끊임없이 탐구합니다</p>
+                                <p className="text-white/70">새로운 아이디어와 개념을 끊임없이 탐구합니다</p>
                             </motion.div>
                             <motion.div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl hover:bg-white/10 transition-colors duration-300" variants={fadeInUp}>
-                                <div className="text-4xl mb-4 text-purple-400">🚀</div>
                                 <h3 className="text-xl font-bold text-white mb-2">도전</h3>
-                                <p className="text-white/70">한계를 뛰어넘는 도전 정신으로 혁신을 추구합니다</p>
+                                <p className="text-white/70">무엇이든 해봐야 안다라는 생각으로 도전합니다</p>
                             </motion.div>
                             <motion.div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl hover:bg-white/10 transition-colors duration-300" variants={fadeInUp}>
-                                <div className="text-4xl mb-4 text-teal-400">🤝</div>
                                 <h3 className="text-xl font-bold text-white mb-2">공유</h3>
                                 <p className="text-white/70">생각의 공유를 통해 더 큰 가치를 만들어 냅니다</p>
                             </motion.div>
@@ -199,28 +185,28 @@ const ModernIndex = () => {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                             <InteractiveCard
-                                title="AI 연구 플랫폼"
-                                description="최신 인공지능 기술을 연구하고 개발하는 플랫폼을 제공합니다"
+                                title="정보교류회"
+                                description="CAS 회원들끼리 정보를 공유하며 교류합니다."
                                 image="index/index_roadmap.png?height=300&width=300"
-                                color="bg-gradient-to-br from-purple-600/90 to-blue-600/90"
+                                color="bg-gradient-to-br from-purple-500/90 to-black-900"
                             />
                             <InteractiveCard
-                                title="협업 시스템"
-                                description="학과 내 선배와 후배 간의 효과적인 협업을 위한 시스템을 구축합니다"
+                                title="협업"
+                                description="학과 내 선배와 후배 간의 효과적인 협업을 위한 시스템을 구축합니다."
                                 image="/kimafganta.png?height=300&width=300"
-                                color="bg-gradient-to-br from-blue-600/90 to-teal-600/90"
+                                color="bg-gradient-to-br from-blue-500/90 to-white-900/90"
                             />
                             <InteractiveCard
-                                title="창의적 워크샵"
-                                description="창의력을 자극하는 다양한 워크샵과 세미나를 진행합니다"
+                                title="프로젝트 팀 구성"
+                                description="방학동안 같이 웹 프로젝트를 진행할 팀을 구성해드립니다"
                                 image="/kimafganta.png?height=300&width=300"
-                                color="bg-gradient-to-br from-teal-600/90 to-emerald-600/90"
+                                color="bg-gradient-to-br from-teal-500/90 to-white-600/90"
                             />
                             <InteractiveCard
                                 title="프로젝트 쇼케이스"
                                 description="완성된 프로젝트를 공유하고 피드백을 받을 수 있는 기회를 제공합니다"
                                 image="index/index_roadmap.png?height=300&width=300"
-                                color="bg-gradient-to-br from-emerald-600/90 to-purple-600/90"
+                                color="bg-gradient-to-br from-emerald-500/90 to-white-600/90"
                             />
                         </div>
                     </motion.div>

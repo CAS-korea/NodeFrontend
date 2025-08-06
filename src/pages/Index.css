@@ -4,10 +4,7 @@
 
 
 
-/* 배경 그라데이션 */
-.bg-gradient-radial {
-    background-image: radial-gradient(var(--tw-gradient-stops));
-}
+
 
 /* Firefox 스크롤바 스타일 */
 * {
@@ -52,6 +49,19 @@
     background-image: linear-gradient(to right, #a855f7, #3b82f6, #14b8a6);
 }
 
+/* neural-network canvas */
+.neural-background {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+.neural-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
 
 
 

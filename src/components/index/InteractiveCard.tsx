@@ -51,7 +51,6 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
                         "최신 AI 논문 및 연구 트렌드 정보",
                     ],
                     caption: "최첨단 AI 연구 이미지",
-                    icon: "🧠",
                 };
             case "협업 시스템":
                 return {
@@ -63,7 +62,6 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
                         "코드 리뷰 및 피드백 프로세스",
                     ],
                     caption: "효율적인 협업 시스템 이미지",
-                    icon: "🤝",
                 };
             case "창의적 워크샵":
                 return {
@@ -75,7 +73,6 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
                         "학제간 융합 연구 워크샵",
                     ],
                     caption: "창의적 워크샵 이미지",
-                    icon: "💡",
                 };
             case "프로젝트 쇼케이스":
                 return {
@@ -87,14 +84,12 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
                         "우수 프로젝트 시상 및 지원 프로그램",
                     ],
                     caption: "프로젝트 쇼케이스 이미지",
-                    icon: "🏆",
                 };
             default:
                 return {
                     subtitle: "혁신적인 기술과 아이디어",
                     features: ["혁신적인 기술", "창의적인 아이디어", "효율적인 협업", "지속적인 성장"],
                     caption: "프로젝트 이미지",
-                    icon: "✨",
                 };
         }
     };
@@ -122,7 +117,6 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
                     <div>
                         <div className="flex items-center justify-between">
                             <h3 className="text-2xl font-bold text-white">{title}</h3>
-                            <span className="text-3xl">{detailedContent.icon}</span>
                         </div>
                         <div className="w-16 h-1 bg-white/30 rounded-full mt-2" />
                     </div>
@@ -139,14 +133,14 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
 
                 {/* 호버 효과 */}
                 <motion.div
-                    className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent"
+                    className="absolute inset-0 bg-gradient-to-tr from-white/8 to-transparent"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: isHovering ? 1 : 0 }}
                     transition={{ duration: 0.3 }}
                 />
 
                 {/* 장식 요소 */}
-                <div className="absolute -bottom-6 -right-6 w-24 h-24 rounded-full bg-white/10 blur-xl" />
+                <div className="absolute -bottom-6 -right-6 w-24 h-24 rounded-full bg-white/5 blur-xl" />
             </motion.div>
 
             {/* 모달 */}
