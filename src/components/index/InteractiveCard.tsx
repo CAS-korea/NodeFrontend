@@ -142,33 +142,7 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
                             background: "radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%)"
                         }}
                     >
-                        {/* Floating background elements */}
-                        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                            <motion.div
-                                className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
-                                animate={{
-                                    scale: [1, 1.2, 1],
-                                    rotate: [0, 180, 360],
-                                }}
-                                transition={{
-                                    duration: 20,
-                                    repeat: Infinity,
-                                    ease: "linear"
-                                }}
-                            />
-                            <motion.div
-                                className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full blur-3xl"
-                                animate={{
-                                    scale: [1.2, 1, 1.2],
-                                    rotate: [360, 180, 0],
-                                }}
-                                transition={{
-                                    duration: 25,
-                                    repeat: Infinity,
-                                    ease: "linear"
-                                }}
-                            />
-                        </div>
+
 
                         <motion.div
                             ref={modalRef}
@@ -188,7 +162,7 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
                             {/* Glass morphism container */}
                             <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl">
                                 {/* Animated border glow */}
-                                <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                                <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 rounded-3xl blur opacity-20"></div>
 
                                 {/* Main content container */}
                                 <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-800/90 rounded-3xl">
@@ -278,7 +252,7 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
                                                 transition={{ delay: 0.4, duration: 0.5 }}
                                             >
                                                 <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-white/20">
-                                                    <div className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 animate-pulse"></div>
+                                                    <div className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-400 to-purple-400"></div>
                                                     <p className="text-white text-lg font-semibold">
                                                         {detailedContent.caption}
                                                     </p>
@@ -353,7 +327,6 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
                                                                         {feature}
                                                                     </p>
                                                                 </div>
-
                                                             </div>
                                                         </motion.div>
                                                     ))}
