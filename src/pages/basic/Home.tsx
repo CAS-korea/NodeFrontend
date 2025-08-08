@@ -14,7 +14,7 @@ const Home: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [isLiking, setIsLiking] = useState(false);
     const [isScrapping, setIsScrapping] = useState(false);
-    const [layoutMode, setLayoutMode] = useState<"scroll" | "grid">("grid");
+    const [layoutMode, setLayoutMode] = useState<"scroll" | "grid">("scroll");
     const { getAllPosts, likePost, scrapPost } = useServices();
 
     const fetchPosts = async () => {
