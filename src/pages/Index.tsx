@@ -376,7 +376,7 @@ const ModernIndex = () => {
                                         </div>
                                         <div>
                                             <h4 className="text-lg font-medium text-white mb-2">면접 참여</h4>
-                                            <p className="text-white/70">간단한 면접을 통해 열정과 관심사를 공유해주세요 .임</p>
+                                            <p className="text-white/70">간단한 면접을 통해 열정과 관심사를 공유해주세요.</p>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-4">
@@ -385,13 +385,13 @@ const ModernIndex = () => {
                                         </div>
                                         <div>
                                             <h4 className="text-lg font-medium text-white mb-2">오리엔테이션</h4>
-                                            <p className="text-white/70">프로젝트 소개와 팀 빌딩 과정에 참여합니다.</p>
+                                            <p className="text-white/70">프로젝트 소개와 팀 빌딩 과정에 뛰어드세요!</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="mt-10">
                                     <button className="w-full py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-medium hover:shadow-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300">
-                                        연락주세요!
+                                        많은 관심 부탁드립니다
                                     </button>
                                 </div>
                             </motion.div>
@@ -411,7 +411,7 @@ const ModernIndex = () => {
                                         </div>
                                         <div>
                                             <h4 className="text-lg font-medium text-white">이메일</h4>
-                                            <p className="text-white/70">cas@example.ac.kr</p>
+                                            <p className="text-white/70">cas.aikorea@gmail.com</p>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-4">
@@ -423,7 +423,7 @@ const ModernIndex = () => {
                                         </div>
                                         <div>
                                             <h4 className="text-lg font-medium text-white">위치</h4>
-                                            <p className="text-white/70">중앙대학교 310관 팀플룸</p>
+                                            <p className="text-white/70">중앙대학교 근처</p>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-4">
@@ -434,7 +434,7 @@ const ModernIndex = () => {
                                         </div>
                                         <div>
                                             <h4 className="text-lg font-medium text-white">활동 시간</h4>
-                                            <p className="text-white/70">꼴릴 때마다</p>
+                                            <p className="text-white/70">미정</p>
                                         </div>
                                     </div>
                                 </div>
