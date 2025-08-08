@@ -55,11 +55,11 @@ const ModernIndex = () => {
 
     // 갤러리 이미지 데이터
     const galleryImages = [
-        { src: "/kimafganta.png?height=400&width=400", alt: "AI Research", caption: "인공지능 연구 프로젝트" },
-        { src: "/kimafganta.png?height=400&width=400", alt: "Team Collaboration", caption: "팀 협업 세션" },
-        { src: "/kimafganta.png?height=400&width=400", alt: "Workshop", caption: "AI 워크샵" },
-        { src: "/kimafganta.png?height=400&width=400", alt: "Seminar", caption: "세미나 발표" },
-        { src: "/kimafganta.png?height=400&width=400", alt: "Project Demo", caption: "프로젝트 데모" },
+        { src: "index/index_collab.jpg?height=400&width=400", alt: "Collab", caption: "팀 협업" },
+        { src: "index/index_design.jpg?height=400&width=400", alt: "Design", caption: "웹 디자인" },
+        { src: "index/index_link.jpg?height=400&width=400", alt: "Link", caption: "다른 이들과 소통" },
+        { src: "index/index_seminar.jpg?height=400&width=400", alt: "Seminar", caption: "세미나 발표" },
+        { src: "index/index_memory.jpg?height=400&width=400", alt: "Memory", caption: "값진 경험들" },
     ];
 
     return (
@@ -200,25 +200,24 @@ const ModernIndex = () => {
                             <InteractiveCard
                                 title="정보교류회"
                                 description="CAS 회원들끼리 정보를 공유하며 교류합니다."
-                                image="index/index_roadmap.png?height=300&width=300"
+                                video="index/index_seminar_vid.MOV?height=400&width=400"
+                            />
+                            <InteractiveCard
+                                title="데모"
+                                description="만들어진 프로토타입을 시연 영상으로 발표할 시간입니다!"
+                                video="index/index_demo.MOV?height=400&width=400"
 
                             />
                             <InteractiveCard
-                                title="협업"
-                                description="학과 내 선배와 후배 간의 효과적인 협업을 위한 시스템을 구축합니다."
-                                image="/kimafganta.png?height=300&width=300"
+                                title="프로토타입 제작"
+                                description="프로토타입을 제작하여 자랑해보세요! 시작이 즐거워야 목표까지 즐거울 수 있습니다."
+                                video="index/index_prototype.MOV?height=400&width=400"
 
                             />
                             <InteractiveCard
-                                title="프로젝트 팀 구성"
-                                description="방학동안 같이 웹 프로젝트를 진행할 팀을 구성해드립니다"
-                                image="/kimafganta.png?height=300&width=300"
-
-                            />
-                            <InteractiveCard
-                                title="프로젝트 쇼케이스"
-                                description="완성된 프로젝트를 공유하고 피드백을 받을 수 있는 기회를 제공합니다"
-                                image="index/index_roadmap.png?height=300&width=300"
+                                title="해커톤 참여"
+                                description="CAS 내에서 해커톤 팀을 꾸려 실제 해커톤들도 참여해보실 수 있습니다."
+                                image="index/index_hack.JPG?height=400&width=400"
 
                             />
                         </div>
@@ -366,8 +365,8 @@ const ModernIndex = () => {
                                             <span className="text-purple-400">01</span>
                                         </div>
                                         <div>
-                                            <h4 className="text-lg font-medium text-white mb-2">지원서 제출</h4>
-                                            <p className="text-white/70">온라인 지원서를 작성하여 제출해주세요.</p>
+                                            <h4 className="text-lg font-medium text-white mb-2">개별 연락</h4>
+                                            <p className="text-white/70">저희 임원진 중 한 명에게 연락 주시길 바랍니다.</p>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-4">

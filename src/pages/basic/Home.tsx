@@ -1,6 +1,7 @@
+// No changes are needed in Home.tsx. It will correctly render the hybrid PostGridView.
 import React, { useEffect, useState } from "react";
 import PostCard from "../../components/postcard/PostCard";
-import PostContainer from "../../components/postcard/Container.tsx";
+import PostContainer from "../../components/postcard/Container";
 import PostGridView from "../../components/postcard/PostGridView";
 import { useServices } from "../../context/ServicesProvider.tsx";
 import { cardActivityInfo, cardPostInfo, cardUserInfo } from "../../types/PostcardDto";
@@ -13,8 +14,7 @@ const Home: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [isLiking, setIsLiking] = useState(false);
     const [isScrapping, setIsScrapping] = useState(false);
-    const [layoutMode, setLayoutMode] = useState<"scroll" | "grid">("scroll");
-
+    const [layoutMode, setLayoutMode] = useState<"scroll" | "grid">("grid");
     const { getAllPosts, likePost, scrapPost } = useServices();
 
     const fetchPosts = async () => {
@@ -77,9 +77,9 @@ const Home: React.FC = () => {
         <PostContainer>
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-3xl font-semibold text-gray-800 dark:text-gray-200">홈</h1>
-                {/* LayoutToggleButton에 layoutMode와 setLayoutMode props 전달 */}
                 <LayoutToggleButton layoutMode={layoutMode} setLayoutMode={setLayoutMode} />
             </div>
+
             {layoutMode === "scroll" ? (
                 <div className="space-y-4 mt-4">
                     {posts.length > 0 ? (

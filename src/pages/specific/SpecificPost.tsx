@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { marked } from "marked";
 
 marked.setOptions({
-    gfm: true,   // 이미 GFM 문법을 쓰고 계시면 같이 켜 두세요
+    gfm: true,
     breaks: true // <- 핵심! single '\n' → <br>
 });
 
@@ -498,7 +498,7 @@ const SpecificPost: React.FC = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.5 }}
-                    className="mt-6 mb-20"
+                    className="mt-8"
                 >
                     <div className="flex items-center justify-between mb-8">
                         <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">

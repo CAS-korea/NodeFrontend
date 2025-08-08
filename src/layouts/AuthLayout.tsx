@@ -9,7 +9,7 @@ import { ChevronRight, Users, BookOpen, Share2 } from "lucide-react"
 const AuthLayout: React.FC = () => {
     // quotes 인덱스
     const [currentQuote, setCurrentQuote] = useState(0)
-
+    const [paneEntered, setPaneEntered] = useState(false);
     // Node 커뮤니티 관련 문구들
     const quotes = [
         "학술적 교류로 지식을 넓히는 Noders",
@@ -133,10 +133,12 @@ const AuthLayout: React.FC = () => {
 
                 {/* 오른쪽 영역: Outlet으로 자식 페이지(로그인/회원가입 등) 표시 */}
                 <motion.div
-                    className="flex-1 p-8 sm:p-10 relative z-10"
+                    className="flex-1 p-8 sm:p-10 relative z-10 bg-white"
                     initial={{ opacity: 0, x: 30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.7, delay: 0.2 }}
+                    onAnimationComplete={() => setPaneEntered(true)}
+                    style={paneEntered ? { transform: 'none' } : undefined}
                 >
                     <Outlet />
                 </motion.div>

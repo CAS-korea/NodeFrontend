@@ -135,7 +135,7 @@ const Login: React.FC = () => {
                     <div className="block md:hidden text-center mt-6">
                         <Link
                             to={ClientUrl.REGISTER}
-                            className="inline-block  text-white px-6 py-3 rounded-full hover:bg-gray-800 transition-colors"
+                            className="inline-block bg-black text-white px-6 py-3 rounded-full hover:bg-gray-800 transition-colors"
                         >
                             회원가입 하기
                         </Link>

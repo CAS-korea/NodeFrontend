@@ -14,8 +14,8 @@ function App() {
 
     return (
         <ThemeProvider>
+            <CustomCursor />
             <div className="App">
-                <CustomCursor />
                 <Analytics />
                 <BrowserRouter>
                     <ServicesProvider>

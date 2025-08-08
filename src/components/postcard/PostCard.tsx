@@ -68,7 +68,7 @@ const PostCard: React.FC<PostCardProps> = ({
                             onClick={(e) => e.stopPropagation()}
                             className="flex items-center space-x-3 group"
                         >
-                            <Avatar className="h-12 w-12 border-2 border-white shadow-sm">
+                            <Avatar className="h-12 w-12 border-2 border-white shadow-sm dark:text-white">
                                 <AvatarImage src={userInfo?.profileImageUrl || "/placeholder.svg"} alt={userInfo?.name || "Author"} />
                                 <AvatarFallback>{userInfo?.name?.charAt(0) || "U"}</AvatarFallback>
                             </Avatar>

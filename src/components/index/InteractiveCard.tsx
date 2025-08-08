@@ -14,9 +14,11 @@ interface InteractiveCardProps {
     title: string;
     description: string;
     image?: string;
+    video?: string;            // ★ 변경: mp4 · webm 등
+    poster?: string;           // ★ 변경: video 로딩 전 썸네일
 }
 
-const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, image }) => {
+const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, image, video, poster, }) => {
     const [showModal, setShowModal] = useState(false);
     const [isHovering, setIsHovering] = useState(false);
     const modalRef = useRef<HTMLDivElement | null>(null);
@@ -36,57 +38,56 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
         };
     }, [showModal]);
 
-    // 제목에 따른 상세 콘텐츠 구성
     const getDetailedContent = () => {
         switch (title) {
-            case "AI 연구 플랫폼":
+            case "정보교류회":
                 return {
-                    subtitle: "최첨단 인공지능 연구를 위한 통합 플랫폼",
+                    subtitle: "AI 연구 지식‧데이터 교류 세션",
                     features: [
-                        "딥러닝 모델 개발 및 학습 환경",
-                        "대규모 데이터셋 처리 및 분석 도구",
-                        "연구 결과 공유 및 협업 시스템",
-                        "최신 AI 논문 및 연구 트렌드 정보",
+                        "최신 논문·트렌드 리뷰",
+                        "공개 데이터셋·코드 공유",
+                        "네트워킹",
                     ],
-                    caption: "최첨단 AI 연구 이미지",
+                    caption: "AI 정보교류회 영상",
                 };
-            case "협업 시스템":
+
+            case "데모":
                 return {
-                    subtitle: "효율적인 팀워크를 위한 지능형 협업 시스템",
+                    subtitle: "프로젝트 기능 시연 & 피드백",
                     features: [
-                        "실시간 프로젝트 관리 및 진행 상황 공유",
-                        "멘토링 및 지식 공유 플랫폼",
-                        "팀 빌딩 및 역할 분담 시스템",
-                        "코드 리뷰 및 피드백 프로세스",
+                        "실시간 데모 발표",
+                        "임원진 코멘트 수렴",
+                        "성과 아카이빙",
                     ],
-                    caption: "효율적인 협업 시스템 이미지",
+                    caption: "시연 동영상",
                 };
-            case "창의적 워크샵":
+
+            case "프로토타입 제작":
                 return {
-                    subtitle: "혁신적인 아이디어를 발굴하는 창의적 워크샵",
+                    subtitle: "아이디어 구현 워크샵",
                     features: [
-                        "AI 기술 트렌드 및 응용 사례 세미나",
-                        "문제 해결 중심의 해커톤 이벤트",
-                        "산업 전문가 초청 강연 및 네트워킹",
-                        "학제간 융합 연구 워크샵",
+                        "디자인 스프린트",
+                        "빠른 모델링·테스트",
+                        "사용자 경험 검증",
                     ],
-                    caption: "창의적 워크샵 이미지",
+                    caption: "NODE 프로토타입 동영상",
                 };
-            case "프로젝트 쇼케이스":
+
+            case "해커톤 참여":
                 return {
-                    subtitle: "혁신적인 프로젝트를 공유하는 쇼케이스 플랫폼",
+                    subtitle: "문제 해결형 팀 해커톤",
                     features: [
-                        "정기적인 프로젝트 발표회 및 데모 세션",
-                        "온라인 포트폴리오 및 프로젝트 갤러리",
-                        "산학협력 프로젝트 전시 기회",
-                        "우수 프로젝트 시상 및 지원 프로그램",
+                        "24-48h 집중 밤샘 개발",
+                        "잘맞는 팀 구성",
+                        "미쳐날뛰는 코딩실력",
                     ],
-                    caption: "프로젝트 쇼케이스 이미지",
+                    caption: "해커톤 이미지",
                 };
+
             default:
                 return {
-                    subtitle: "혁신적인 기술과 아이디어",
-                    features: ["혁신적인 기술", "창의적인 아이디어", "효율적인 협업", "지속적인 성장"],
+                    subtitle: "혁신 기술·아이디어 탐구",
+                    features: ["기술 탐색", "창의적 발상", "협업 문화"],
                     caption: "프로젝트 이미지",
                 };
         }
@@ -132,68 +133,247 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
             <AnimatePresence>
                 {showModal && (
                     <motion.div
-                        className="fixed inset-0 flex items-center justify-center z-50"
+                        className="fixed inset-0 flex items-center justify-center z-50 p-4"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        style={{ backdropFilter: "blur(8px)" }}
+                        style={{
+                            backdropFilter: "blur(12px)",
+                            background: "radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%)"
+                        }}
                     >
+                        {/* Floating background elements */}
+                        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                            <motion.div
+                                className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
+                                animate={{
+                                    scale: [1, 1.2, 1],
+                                    rotate: [0, 180, 360],
+                                }}
+                                transition={{
+                                    duration: 20,
+                                    repeat: Infinity,
+                                    ease: "linear"
+                                }}
+                            />
+                            <motion.div
+                                className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full blur-3xl"
+                                animate={{
+                                    scale: [1.2, 1, 1.2],
+                                    rotate: [360, 180, 0],
+                                }}
+                                transition={{
+                                    duration: 25,
+                                    repeat: Infinity,
+                                    ease: "linear"
+                                }}
+                            />
+                        </div>
+
                         <motion.div
                             ref={modalRef}
-                            className="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl mx-auto relative overflow-hidden max-w-3xl w-full max-h-[80vh] overflow-y-auto"
-                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-                            animate={{ scale: 1, opacity: 1, y: 0 }}
-                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                            transition={{ duration: 0.4, ease: "easeOut" }}
+                            className="relative overflow-hidden max-w-4xl w-full max-h-[85vh] overflow-y-auto"
+                            initial={{ scale: 0.8, opacity: 0, y: 50, rotateX: -15 }}
+                            animate={{ scale: 1, opacity: 1, y: 0, rotateX: 0 }}
+                            exit={{ scale: 0.8, opacity: 0, y: 50, rotateX: 15 }}
+                            transition={{
+                                duration: 0.6,
+                                ease: [0.16, 1, 0.3, 1],
+                                type: "spring",
+                                stiffness: 100,
+                                damping: 15
+                            }}
+                            style={{ perspective: "1000px" }}
                         >
-                            <div className="flex flex-col md:flex-row">
-                                {/* 왼쪽 칸: 이미지 섹션 */}
-                                <div className="md:w-2/5 w-full p-6">
-                                    <div className="relative rounded-xl overflow-hidden aspect-square shadow-lg">
-                                        <img
-                                            src={image || "/placeholder.svg?width=400&height=400&query=abstract"}
-                                            alt={title}
-                                            className="w-full h-full object-cover"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                                        <div className="absolute top-4 left-4 text-white text-2xl font-bold">
-                                            {title}
+                            {/* Glass morphism container */}
+                            <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl">
+                                {/* Animated border glow */}
+                                <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+
+                                {/* Main content container */}
+                                <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-800/90 rounded-3xl">
+                                    {/* Header with close button */}
+                                    <div className="absolute top-4 right-4 z-20">
+                                        <motion.button
+                                            onClick={() => setShowModal(false)}
+                                            className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 transition-all duration-300"
+                                            whileHover={{ scale: 1.1, rotate: 90 }}
+                                            whileTap={{ scale: 0.9 }}
+                                        >
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                                <path d="M8 7.293l2.146-2.147a.5.5 0 01.708.708L8.707 8l2.147 2.146a.5.5 0 01-.708.708L8 8.707l-2.146 2.147a.5.5 0 01-.708-.708L7.293 8 5.146 5.854a.5.5 0 01.708-.708L8 7.293z"/>
+                                            </svg>
+                                        </motion.button>
+                                    </div>
+
+                                    <div className="flex flex-col lg:flex-row">
+                                        {/* 왼쪽 칸: 이미지 섹션 */}
+                                        <div className="lg:w-2/5 w-full p-8">
+                                            <motion.div
+                                                className="relative rounded-2xl overflow-hidden aspect-square shadow-2xl"
+                                                initial={{ scale: 0.8, opacity: 0 }}
+                                                animate={{ scale: 1, opacity: 1 }}
+                                                transition={{ delay: 0.2, duration: 0.5 }}
+                                            >
+                                                {/* Floating particles around image */}
+                                                <div className="absolute -inset-4 pointer-events-none">
+                                                    {[...Array(8)].map((_, i) => (
+                                                        <motion.div
+                                                            key={i}
+                                                            className="absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
+                                                            style={{
+                                                                top: `${Math.random() * 100}%`,
+                                                                left: `${Math.random() * 100}%`,
+                                                            }}
+                                                            animate={{
+                                                                y: [0, -20, 0],
+                                                                opacity: [0, 1, 0],
+                                                                scale: [0, 1, 0],
+                                                            }}
+                                                            transition={{
+                                                                duration: 3 + Math.random() * 2,
+                                                                repeat: Infinity,
+                                                                delay: Math.random() * 2,
+                                                            }}
+                                                        />
+                                                    ))}
+                                                </div>
+
+                                                {/* Image with enhanced effects */}
+                                                <div className="relative group">
+                                                    {video ? (
+                                                        <video
+                                                            src={video}
+                                                            poster={poster ?? image}
+                                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                                            autoPlay
+                                                            loop
+                                                            muted
+                                                            playsInline
+                                                        />
+                                                    ) : (
+                                                        <img
+                                                            src={
+                                                                image ??
+                                                                "/placeholder.svg?width=400&height=400&query=abstract"
+                                                            }
+                                                            alt={title}
+                                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                                        />
+                                                    )}
+
+                                                    {/* Enhanced gradient overlay */}
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
+
+                                                    {/* Shimmer effect */}
+                                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
+                                                </div>
+                                            </motion.div>
+
+                                            {/* Caption with enhanced styling */}
+                                            <motion.div
+                                                className="mt-6 text-center"
+                                                initial={{ y: 20, opacity: 0 }}
+                                                animate={{ y: 0, opacity: 1 }}
+                                                transition={{ delay: 0.4, duration: 0.5 }}
+                                            >
+                                                <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-white/20">
+                                                    <div className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 animate-pulse"></div>
+                                                    <p className="text-white text-lg font-semibold">
+                                                        {detailedContent.caption}
+                                                    </p>
+                                                </div>
+                                            </motion.div>
+                                        </div>
+
+                                        {/* 오른쪽 칸: 콘텐츠 섹션 */}
+                                        <div className="lg:w-3/5 w-full p-8 lg:border-l border-white/10">
+                                            {/* Title section */}
+                                            <motion.div
+                                                className="mb-8"
+                                                initial={{ x: 30, opacity: 0 }}
+                                                animate={{ x: 0, opacity: 1 }}
+                                                transition={{ delay: 0.3, duration: 0.5 }}
+                                            >
+                                                <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent mb-2">
+                                                    {title}
+                                                </h2>
+                                                <p className="text-blue-300/80 text-lg">
+                                                    {detailedContent.subtitle}
+                                                </p>
+                                                <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-3"></div>
+                                            </motion.div>
+
+                                            {/* Features section */}
+                                            <motion.div
+                                                className="mb-8"
+                                                initial={{ x: 30, opacity: 0 }}
+                                                animate={{ x: 0, opacity: 1 }}
+                                                transition={{ delay: 0.4, duration: 0.5 }}
+                                            >
+                                                <h3 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
+                                                    <div className="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+                                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="white">
+                                                            <path d="M6 0l1.5 4.5h4.5l-3.75 2.7 1.5 4.5L6 9l-3.75 2.7 1.5-4.5L0 4.5h4.5L6 0z"/>
+                                                        </svg>
+                                                    </div>
+                                                    주요 특징
+                                                </h3>
+
+                                                <div className="space-y-4">
+                                                    {detailedContent.features.map((feature, index) => (
+                                                        <motion.div
+                                                            key={index}
+                                                            className="group relative"
+                                                            initial={{ opacity: 0, x: -20, scale: 0.8 }}
+                                                            animate={{ opacity: 1, x: 0, scale: 1 }}
+                                                            transition={{
+                                                                delay: index * 0.1 + 0.5,
+                                                                duration: 0.5,
+                                                                type: "spring",
+                                                                stiffness: 100,
+                                                                damping: 15
+                                                            }}
+                                                        >
+                                                            {/* Background glow effect */}
+                                                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-xl blur-sm group-hover:from-blue-500/10 group-hover:to-purple-500/10 transition-all duration-500"></div>
+
+                                                            <div className="relative flex items-center gap-4 bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 group-hover:transform group-hover:scale-105">
+                                                                {/* Enhanced number badge */}
+                                                                <div className="relative flex-shrink-0">
+                                                                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                                                                        {index + 1}
+                                                                    </div>
+                                                                    {/* Floating ring */}
+                                                                    <div className="absolute inset-0 rounded-2xl border-2 border-blue-400/30 animate-pulse"></div>
+                                                                </div>
+
+                                                                <div className="flex-1">
+                                                                    <p className="text-white/95 font-medium text-lg leading-relaxed">
+                                                                        {feature}
+                                                                    </p>
+                                                                </div>
+
+                                                            </div>
+                                                        </motion.div>
+                                                    ))}
+                                                </div>
+                                            </motion.div>
+
+                                            {/* Description section */}
+                                            <motion.div
+                                                className="relative p-6 rounded-2xl bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/20"
+                                                initial={{ y: 30, opacity: 0 }}
+                                                animate={{ y: 0, opacity: 1 }}
+                                                transition={{ delay: 0.8, duration: 0.5 }}
+                                            >
+                                                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-t-2xl"></div>
+                                                <p className="text-white/80 text-lg leading-relaxed">
+                                                    {description}
+                                                </p>
+                                            </motion.div>
                                         </div>
                                     </div>
-                                    <p className="mt-4 text-center text-gray-400 text-sm">
-                                        {detailedContent.caption}
-                                    </p>
-                                    <div className="mt-4 flex justify-center">
-                                        <button
-                                            onClick={() => setShowModal(false)}
-                                            className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors"
-                                        >
-                                            닫기
-                                        </button>
-                                    </div>
-                                </div>
-                                {/* 오른쪽 칸: 콘텐츠 섹션 */}
-                                <div className="md:w-3/5 w-full p-6">
-                                    <h3 className="text-xl font-semibold text-white mb-4">주요 특징</h3>
-                                    <div className="space-y-4 mb-6">
-                                        {detailedContent.features.map((feature, index) => (
-                                            <motion.div
-                                                key={index}
-                                                className="flex items-start gap-3 bg-white/5 p-3 rounded-lg"
-                                                initial={{ opacity: 0, x: -10 }}
-                                                animate={{ opacity: 1, x: 0 }}
-                                                transition={{ delay: index * 0.1 + 0.2 }}
-                                            >
-                                                <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0">
-                                                    {index + 1}
-                                                </div>
-                                                <p className="text-white/90">{feature}</p>
-                                            </motion.div>
-                                        ))}
-                                    </div>
-                                    <p className="text-white/70 mb-6">
-                                        {description} NODE 프로젝트는 학생들에게 최고의 학습 경험과 실무 기회를 제공합니다.
-                                    </p>
                                 </div>
                             </div>
                         </motion.div>
