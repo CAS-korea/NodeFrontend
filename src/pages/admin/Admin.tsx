@@ -19,6 +19,8 @@ import CheerOverlay from "../../components/secretfile/CheerOverlay"
 import UpdateModal from "../../components/admin/UpdateModal"
 import BanModal from "../../components/admin/BanModal"
 
+
+
 // PostContainer 대신 여유로운 레이아웃을 위한 Container
 const Container: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
@@ -147,7 +149,7 @@ const Admin: React.FC = () => {
 
     return (
         <Container>
-            <div className="max-w-7xl mx-auto">
+            <div className="max-w-7xl mx-auto sm:px-12 lg:px-12 py-8 xl:py-16">
                 {/* Header & Tab Navigation */}
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                     <div className="flex items-center">
@@ -159,7 +161,7 @@ const Admin: React.FC = () => {
                             onClick={() => setActiveTab("users")}
                             className={`px-4 py-2 rounded-lg flex items-center space-x-2 ${
                                 activeTab === "users"
-                                    ? "bg-primary text-white"
+                                    ? "bg-blue-500 text-white"
                                     : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300"
                             }`}
                         >
@@ -170,7 +172,7 @@ const Admin: React.FC = () => {
                             onClick={() => setActiveTab("reports")}
                             className={`px-4 py-2 rounded-lg flex items-center space-x-2 ${
                                 activeTab === "reports"
-                                    ? "bg-primary text-white"
+                                    ? "bg-red-500 text-white"
                                     : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300"
                             }`}
                         >

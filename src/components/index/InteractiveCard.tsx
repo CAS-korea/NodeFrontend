@@ -286,11 +286,6 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ title, description, i
                                                 transition={{ delay: 0.4, duration: 0.5 }}
                                             >
                                                 <h3 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
-                                                    <div className="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
-                                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="white">
-                                                            <path d="M6 0l1.5 4.5h4.5l-3.75 2.7 1.5 4.5L6 9l-3.75 2.7 1.5-4.5L0 4.5h4.5L6 0z"/>
-                                                        </svg>
-                                                    </div>
                                                     주요 특징
                                                 </h3>
 
