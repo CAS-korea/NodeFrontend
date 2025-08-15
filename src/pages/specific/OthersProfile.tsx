@@ -11,6 +11,7 @@ import { UserService } from "../../services/UserService";
 import type { UserProfileDto, PostCardDto } from "../../types/UserProfileDto";
 import FollowModal from "../../components/profile/FollowModal";
 import {FollowUser} from "../../types/FollowUser.ts";
+import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
 
 const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -146,11 +147,16 @@ const OthersProfile: React.FC = () => {
                 <motion.div {...fadeInUp} className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center">
-                            <img
-                                src={userProfile.userInformationDto.profileImageUrl || "/placeholder.svg"}
-                                alt={userProfile.userInformationDto.name}
-                                className="w-24 h-24 rounded-full object-cover border-4 border-blue-500"
-                            />
+                            <Avatar className="w-24 h-24 border-4 border-blue-200">
+                                <AvatarImage
+                                    src={userProfile.userInformationDto.profileImageUrl || undefined} // "" → undefined
+                                    alt={userProfile.userInformationDto.name}
+                                />
+                                <AvatarFallback className="text-3xl font-bold">
+                                    {userProfile.userInformationDto.name?.charAt(0) || "U"}
+                                </AvatarFallback>
+                            </Avatar>
+
                             <div className="ml-4">
                                 <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
                                     {userProfile.userInformationDto.name}

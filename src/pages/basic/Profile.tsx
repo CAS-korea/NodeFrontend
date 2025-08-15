@@ -12,6 +12,7 @@ import { UserService } from "../../services/UserService";
 import { UserProfileDto, PostCardDto } from "../../types/UserProfileDto";
 import { FollowUser } from "../../types/FollowUser";
 import Cookies from "js-cookie";
+import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
 
 // 애니메이션 설정: 부드러운 페이드 인 및 슬라이드 업 효과
 const fadeInUp = {
@@ -45,7 +46,7 @@ const Profile: React.FC = () => {
     const [isFollowingModalOpen, setIsFollowingModalOpen] = useState(false);
     const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
     const [profileImage, setProfileImage] = useState<File | null>(null); // 업로드할 이미지 파일
-    const [profileImageUrl, setProfileImageUrl] = useState<string>(""); // 업로드된 이미지 URL
+    const [profileImageUrl, setProfileImageUrl] = useState<string | undefined>(undefined);
     const [imageUploading, setImageUploading] = useState(false); // 이미지 업로드 상태
 
     const { likePost, scrapPost, getUserProfile, updateUserProfile, uploadImage } = useServices();
@@ -59,7 +60,7 @@ const Profile: React.FC = () => {
             if (profile) {
                 setUserProfile(profile);
                 setPosts(profile.postCardDtoList);
-                setProfileImageUrl(profile.userInformationDto.profileImageUrl || ""); // 초기값 설정
+                setProfileImageUrl(profile.userInformationDto.profileImageUrl || undefined);
             }
         } catch (error) {
             console.error("프로필 불러오기 실패: ", error);
@@ -188,13 +189,18 @@ const Profile: React.FC = () => {
                 <motion.div {...fadeInUp} className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center">
-                            <img
-                                src={userProfile.userInformationDto.profileImageUrl || "/placeholder.svg"}
-                                alt={userProfile.userInformationDto.name}
-                                className="w-24 h-24 rounded-full object-cover border-4 border-blue-500"
-                            />
+                            <Avatar className="h-24 w-24 border-4 border-blue-500">
+                                <AvatarImage
+                                    src={profileImageUrl || userProfile.userInformationDto.profileImageUrl || undefined}
+                                    alt={userProfile.userInformationDto.name}
+                                />
+                                <AvatarFallback className="text-3xl font-bold">
+                                    {userProfile.userInformationDto.name?.charAt(0) || "U"}
+                                </AvatarFallback>
+                            </Avatar>
+
                             <div className="ml-4">
-                                <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                                <h2 className="text-10xl font-bold text-gray-900 dark:text-gray-100">
                                     {userProfile.userInformationDto.name}
                                 </h2>
                                 <p className="text-gray-600 dark:text-gray-300">@{myUserId}</p>

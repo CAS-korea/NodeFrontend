@@ -1,10 +1,10 @@
 import './pages/Index.css';
-import {BrowserRouter} from "react-router-dom";
-import {ServicesProvider} from "./context/ServicesProvider.tsx";
-import Router from "../src/router/Router.tsx"; // Router 컴포넌트를 별도 파일에서 import
+import { HashRouter } from "react-router-dom"; // ✅ 변경
+import { ServicesProvider } from "./context/ServicesProvider.tsx";
+import Router from "../src/router/Router.tsx";
 import CustomCursor from './components/CustomCursor.tsx';
-import {useEffect} from "react";
-import { ThemeProvider } from './layouts/ThemeContext'; // 전역 테마 컨텍스트
+import { useEffect } from "react";
+import { ThemeProvider } from './layouts/ThemeContext';
 import { Analytics } from "@vercel/analytics/react";
 
 function App() {
@@ -17,11 +17,11 @@ function App() {
             <CustomCursor />
             <div className="App">
                 <Analytics />
-                <BrowserRouter>
+                <HashRouter>
                     <ServicesProvider>
                         <Router />
                     </ServicesProvider>
-                </BrowserRouter>
+                </HashRouter>
             </div>
         </ThemeProvider>
     );
